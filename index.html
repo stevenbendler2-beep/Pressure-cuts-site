@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pressure Cut's: driveway, gutter and dryer vent cleaning in Chesterfield, MO. Free estimates. Call or text 352-816-2574.">
+<title>Pressure Cut's</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Public+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a grimy concrete slab with one clean stripe cut through it — the before/after line is the identity. Single column, generous sections, sticky call bar. */
+:root{
+  --bg:#eef0f0; --surface:#ffffff; --ink:#14232c; --muted:#56646b;
+  --grime:#8c8a80; --grime-dark:#6f6d63; --clean:#d9dedd;
+  --accent:#0a7fa8; --accent-ink:#ffffff; --line:#cfd6d7; --hivis:#f2b705;
+  --display:"Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f171b; --surface:#16222a; --ink:#e6eef0; --muted:#9aabb2;
+  --grime:#3b3a35; --grime-dark:#2c2b27; --clean:#5d6a6e;
+  --accent:#37b6e0; --accent-ink:#06141a; --line:#26353d; --hivis:#f2b705; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f171b; --surface:#16222a; --ink:#e6eef0; --muted:#9aabb2;
+  --grime:#3b3a35; --grime-dark:#2c2b27; --clean:#5d6a6e;
+  --accent:#37b6e0; --accent-ink:#06141a; --line:#26353d; --hivis:#f2b705; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);line-height:.95;margin:0;text-wrap:balance;letter-spacing:.01em}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--hivis);outline-offset:3px}
+.label{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* Top bar */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{font-family:var(--display);font-weight:900;font-size:1.6rem;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.brand span{color:var(--accent)}
+.top nav{display:flex;gap:18px;flex-wrap:wrap}
+.top nav a{color:var(--ink);text-decoration:none;font-weight:500;font-size:.95rem}
+.top nav a:hover{color:var(--accent)}
+@media (max-width:640px){.top nav a:not(.navcall){display:none}}
+.navcall{background:var(--accent);color:var(--accent-ink)!important;padding:6px 14px;border-radius:4px}
+
+/* Hero slab */
+.slab{position:relative;overflow:hidden;color:#fff;
+  background:
+   radial-gradient(circle at 12% 30%,rgba(0,0,0,.18) 0 2px,transparent 3px) 0 0/23px 19px,
+   radial-gradient(circle at 70% 60%,rgba(0,0,0,.14) 0 1.5px,transparent 2.5px) 0 0/17px 29px,
+   radial-gradient(ellipse at 80% 20%,rgba(40,50,20,.35),transparent 55%),
+   radial-gradient(ellipse at 20% 90%,rgba(30,25,10,.4),transparent 60%),
+   linear-gradient(160deg,var(--grime),var(--grime-dark));
+}
+.stripe{position:absolute;top:-20%;bottom:-20%;left:54%;width:clamp(120px,22vw,260px);transform:rotate(14deg);
+  background:
+   repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 9px),
+   linear-gradient(90deg,transparent,var(--clean) 6%,var(--clean) 94%,transparent);
+  box-shadow:0 0 40px rgba(255,255,255,.15);
+  animation:wash 1.6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes wash{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@media (prefers-reduced-motion:reduce){.stripe{animation:none}}
+.slab .wrap{position:relative;padding-block:clamp(56px,10vw,110px)}
+.slab .label{color:rgba(255,255,255,.8)}
+.slab h1{font-size:clamp(3.2rem,11vw,7.5rem);font-weight:900;text-transform:uppercase;margin-top:14px;max-width:11ch;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.slab h1 em{font-style:normal;color:var(--hivis)}
+.slab .lede{margin-top:20px;max-width:34ch;font-size:1.15rem;color:rgba(255,255,255,.92)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:700 1rem var(--body);padding:13px 22px;border-radius:4px;border:2px solid transparent;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--hivis);color:#1a1400}
+.btn-ghost{background:rgba(0,0,0,.25);color:#fff;border-color:rgba(255,255,255,.6)}
+.btn-accent{background:var(--accent);color:var(--accent-ink)}
+
+/* Sections */
+section.block{padding-block:clamp(56px,8vw,96px)}
+.head{display:grid;gap:10px;margin-bottom:36px;max-width:640px}
+.head h2{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:900;text-transform:uppercase}
+
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:2px;background:var(--line);border:2px solid var(--line)}
+.svc{background:var(--surface);padding:28px 26px;display:grid;gap:12px;align-content:start;min-width:0}
+.svc h3{font-size:2rem;font-weight:700;text-transform:uppercase}
+.svc p{color:var(--muted)}
+.svc .why{font-family:var(--mono);font-size:.8rem;color:var(--ink);border-top:1px dashed var(--line);padding-top:12px}
+
+/* Free estimate band */
+.free{background:var(--ink);color:var(--bg)}
+.free .wrap{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;padding-block:40px}
+.free h2{font-size:clamp(2rem,5vw,3rem);font-weight:900;text-transform:uppercase}
+.free h2 em{font-style:normal;color:var(--hivis)}
+.free p{color:var(--bg);opacity:.8;margin-top:6px}
+
+/* How it works */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:28px;counter-reset:s}
+.step{display:grid;gap:8px;min-width:0}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--display);font-weight:900;font-size:3rem;color:var(--accent);line-height:1}
+.step h3{font-size:1.5rem;font-weight:700;text-transform:uppercase}
+.step p{color:var(--muted)}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:40px;align-items:start}
+.phonecard{background:var(--surface);border:2px solid var(--line);border-radius:6px;padding:28px;display:grid;gap:14px}
+.phone{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,8vw,3.4rem);letter-spacing:.02em;user-select:all;font-variant-numeric:tabular-nums}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.btn-line{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-line:hover{border-color:var(--accent)}
+.area{display:grid;gap:4px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted)}
+.area strong{color:var(--ink)}
+
+form{display:grid;gap:14px}
+.field{display:grid;gap:6px}
+.field label{font-weight:700;font-size:.9rem}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:4px;padding:11px 12px;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);outline:none}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip span{display:inline-block;padding:8px 14px;border:2px solid var(--line);border-radius:999px;cursor:pointer;font-size:.9rem;background:var(--surface)}
+.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip input:focus-visible+span{outline:3px solid var(--hivis);outline-offset:2px}
+.out{display:grid;gap:10px;background:var(--surface);border:2px dashed var(--accent);border-radius:6px;padding:18px}
+.out pre{margin:0;white-space:pre-wrap;font-family:var(--mono);font-size:.85rem}
+.err{color:#c0392b;font-size:.9rem}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Pressure <span>Cut's</span></a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#estimate">Estimate</a>
+      <a class="navcall" href="tel:+13528162574">Call / Text</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="slab" aria-label="Introduction">
+    <div class="stripe" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="label">Chesterfield, MO &amp; surrounding area</div>
+      <h1>See the <em>line</em> we leave behind.</h1>
+      <p class="lede">Professional pressure washing for driveways, plus gutter and dryer vent cleaning. Every job starts with a free estimate.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#estimate">Get a free estimate</a>
+        <a class="btn btn-ghost" href="tel:+13528162574">352-816-2574</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="head">
+        <div class="label">What we do</div>
+        <h2>Three jobs, done right</h2>
+      </div>
+      <div class="services">
+        <article class="svc">
+          <div class="label">Concrete</div>
+          <h3>Driveway Cleaning</h3>
+          <p>We lift the oil spots, tire marks, mildew and years of grime out of your concrete so the whole driveway comes back to one even color.</p>
+          <p class="why">Clean concrete is less slick when wet and makes the whole house look cared for.</p>
+        </article>
+        <article class="svc">
+          <div class="label">Roofline</div>
+          <h3>Gutter Cleaning</h3>
+          <p>Residential gutters cleared of leaves, seed pods and packed debris, with downspouts flushed so water actually leaves the roof.</p>
+          <p class="why">Clogged gutters overflow toward your foundation and fascia boards.</p>
+        </article>
+        <article class="svc">
+          <div class="label">Laundry room</div>
+          <h3>Dryer Vent Cleaning</h3>
+          <p>We clear built-up lint from the vent line between your dryer and the outside wall, so hot air moves out the way it should.</p>
+          <p class="why">Lint buildup slows drying and is a leading cause of home dryer fires.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="free" aria-label="Free estimates">
+    <div class="wrap">
+      <div>
+        <h2>Estimates are <em>always free.</em></h2>
+        <p>Tell us what needs cleaning and we'll give you a straight price before any work starts.</p>
+      </div>
+      <a class="btn btn-primary" href="#estimate">Request yours</a>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <div class="head">
+        <div class="label">How it works</div>
+        <h2>From call to clean</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Call or text</h3><p>Reach us at 352-816-2574 or send the estimate form below.</p></div>
+        <div class="step"><h3>Free estimate</h3><p>We look at the job and give you a clear price up front.</p></div>
+        <div class="step"><h3>We clean</h3><p>We show up on the day we agree to and get to work.</p></div>
+        <div class="step"><h3>You check it</h3><p>Walk the job with us before we pack up.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="estimate" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <div class="label">Free estimate</div>
+        <h2>Let's get you a price</h2>
+      </div>
+      <div class="contact">
+        <div class="phonecard">
+          <div class="label">Call or text</div>
+          <div class="phone" id="phone">352-816-2574</div>
+          <div class="row">
+            <a class="btn btn-accent" href="tel:+13528162574">Call</a>
+            <a class="btn btn-line" href="sms:+13528162574">Text</a>
+            <button class="btn btn-line" type="button" id="copyPhone">Copy number</button>
+          </div>
+          <div class="area">
+            <strong>Service area</strong>
+            Chesterfield, MO and the surrounding area. Not sure if you're in range? Just ask.
+          </div>
+          <div class="area">
+            <strong>Facebook</strong>
+            Follow Pressure Cut's on Facebook for recent jobs and before-and-after photos.
+          </div>
+        </div>
+
+        <form id="estForm" novalidate>
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" autocomplete="name" placeholder="Jane Smith">
+          </div>
+          <div class="field">
+            <label for="addr">Street address or neighborhood</label>
+            <input id="addr" autocomplete="street-address" placeholder="Chesterfield, MO">
+          </div>
+          <div class="field">
+            <span style="font-weight:700;font-size:.9rem">What needs cleaning?</span>
+            <div class="checks">
+              <label class="chip"><input type="checkbox" id="s1" value="Driveway"><span>Driveway</span></label>
+              <label class="chip"><input type="checkbox" id="s2" value="Gutters"><span>Gutters</span></label>
+              <label class="chip"><input type="checkbox" id="s3" value="Dryer vent"><span>Dryer vent</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="notes">Anything we should know?</label>
+            <textarea id="notes" rows="3" placeholder="Two-car driveway, oil stain near the garage"></textarea>
+          </div>
+          <p class="err" id="err" hidden>Add your name and pick at least one service.</p>
+          <button class="btn btn-accent" type="submit">Write my estimate request</button>
+          <div class="out" id="out" hidden>
+            <div class="label">Send this as a text to 352-816-2574</div>
+            <pre id="msg"></pre>
+            <div class="row">
+              <button class="btn btn-accent" type="button" id="copyMsg">Copy message</button>
+              <a class="btn btn-line" id="smsLink" href="sms:+13528162574">Open in Messages</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Pressure Cut's · Chesterfield, MO</span>
+    <span>352-816-2574 · Calls &amp; texts welcome</span>
+  </div>
+</footer>
+
+<script>
+function copy(text, btn){
+  const done=()=>{const o=btn.textContent;btn.textContent="Copied";setTimeout(()=>btn.textContent=o,1600)};
+  try{navigator.clipboard.writeText(text).then(done).catch(()=>sel())}catch(e){sel()}
+  function sel(){const el=btn.dataset.target?document.getElementById(btn.dataset.target):null;if(el){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent="Selected, press copy"}}
+}
+const cp=document.getElementById("copyPhone");cp.dataset.target="phone";
+cp.addEventListener("click",()=>copy("352-816-2574",cp));
+
+const form=document.getElementById("estForm");
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=document.getElementById("name").value.trim();
+  const addr=document.getElementById("addr").value.trim();
+  const notes=document.getElementById("notes").value.trim();
+  const svc=[...form.querySelectorAll(".chip input:checked")].map(i=>i.value);
+  const err=document.getElementById("err");
+  if(!name||!svc.length){err.hidden=false;return}
+  err.hidden=true;
+  let m=`Hi Pressure Cut's, I'd like a free estimate.\nName: ${name}\nServices: ${svc.join(", ")}`;
+  if(addr)m+=`\nLocation: ${addr}`;
+  if(notes)m+=`\nNotes: ${notes}`;
+  document.getElementById("msg").textContent=m;
+  document.getElementById("smsLink").href="sms:+13528162574?&body="+encodeURIComponent(m);
+  document.getElementById("out").hidden=false;
+});
+const cm=document.getElementById("copyMsg");cm.dataset.target="msg";
+cm.addEventListener("click",()=>copy(document.getElementById("msg").textContent,cm));
+</script>
+</body>
+</html>
