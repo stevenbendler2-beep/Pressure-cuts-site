@@ -3,271 +3,364 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Pressure Cut's: driveway, gutter and dryer vent cleaning in Chesterfield, MO. Free estimates. Call or text 352-816-2574.">
-<title>Pressure Cut's</title>
+<title>Pressure Cut's | Chesterfield, MO</title>
+<meta name="description" content="Pressure Cut's: driveway pressure washing, gutter cleaning and dryer vent cleaning in Chesterfield, MO. Free estimates. Call or text 352-816-2574.">
+<meta name="theme-color" content="#0b6fc2">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pressure Cut's | Driveways, Gutters & Dryer Vents">
+<meta property="og:description" content="Friendly, careful cleaning in Chesterfield, MO. Free estimates. Call or text 352-816-2574.">
+<meta property="og:image" content="https://pressure-cuts-site.onrender.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Public+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;700&display=swap">
 <style>
-/* Layout: a grimy concrete slab with one clean stripe cut through it — the before/after line is the identity. Single column, generous sections, sticky call bar. */
 :root{
-  --bg:#eef0f0; --surface:#ffffff; --ink:#14232c; --muted:#56646b;
-  --grime:#8c8a80; --grime-dark:#6f6d63; --clean:#d9dedd;
-  --accent:#0a7fa8; --accent-ink:#ffffff; --line:#cfd6d7; --hivis:#f2b705;
-  --display:"Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
-  --body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --bg:#f6fafd; --surface:#ffffff; --tint:#e8f2fb; --ink:#10263a; --muted:#52677a; --line:#d7e3ee;
+  --blue:#0b6fc2; --blue-d:#085a9f; --sun:#ffc531; --sun-ink:#2a1d00; --green:#2f9e6b;
+  --grime:#8a8576; --shadow:0 10px 30px rgba(16,38,58,.10);
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0f171b; --surface:#16222a; --ink:#e6eef0; --muted:#9aabb2;
-  --grime:#3b3a35; --grime-dark:#2c2b27; --clean:#5d6a6e;
-  --accent:#37b6e0; --accent-ink:#06141a; --line:#26353d; --hivis:#f2b705; color-scheme:dark}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1722; --surface:#132332; --tint:#16293b; --ink:#e7f0f8; --muted:#9db1c3; --line:#22384c;
+  --blue:#4aa8f0; --blue-d:#2f8fd8; --shadow:0 10px 30px rgba(0,0,0,.35); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0f171b; --surface:#16222a; --ink:#e6eef0; --muted:#9aabb2;
-  --grime:#3b3a35; --grime-dark:#2c2b27; --clean:#5d6a6e;
-  --accent:#37b6e0; --accent-ink:#06141a; --line:#26353d; --hivis:#f2b705; color-scheme:dark}
+  --bg:#0c1722; --surface:#132332; --tint:#16293b; --ink:#e7f0f8; --muted:#9db1c3; --line:#22384c;
+  --blue:#4aa8f0; --blue-d:#2f8fd8; --shadow:0 10px 30px rgba(0,0,0,.35); color-scheme:dark}
 
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
-.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
-h1,h2,h3{font-family:var(--display);line-height:.95;margin:0;text-wrap:balance;letter-spacing:.01em}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
 p{margin:0}
-a{color:var(--accent)}
-:focus-visible{outline:3px solid var(--hivis);outline-offset:3px}
-.label{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.85rem;color:var(--blue);background:var(--tint);padding:6px 12px;border-radius:999px}
 
-/* Top bar */
-header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 1rem var(--body);padding:14px 22px;border-radius:14px;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,background .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn-sun{background:var(--sun);color:var(--sun-ink);box-shadow:0 6px 0 #d9a00f}
+.btn-sun:hover{box-shadow:0 8px 0 #d9a00f}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 6px 0 var(--blue-d)}
+.btn-line{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn-line:hover{border-color:var(--blue)}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* Header */
+header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+header.top.scrolled{border-bottom-color:var(--line)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
-.brand{font-family:var(--display);font-weight:900;font-size:1.6rem;text-transform:uppercase;color:var(--ink);text-decoration:none}
-.brand span{color:var(--accent)}
-.top nav{display:flex;gap:18px;flex-wrap:wrap}
-.top nav a{color:var(--ink);text-decoration:none;font-weight:500;font-size:.95rem}
-.top nav a:hover{color:var(--accent)}
-@media (max-width:640px){.top nav a:not(.navcall){display:none}}
-.navcall{background:var(--accent);color:var(--accent-ink)!important;padding:6px 14px;border-radius:4px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.35rem;color:var(--ink);text-decoration:none}
+.brand svg{width:34px;height:34px;flex:none}
+.brand{white-space:nowrap}
+@media (max-width:400px){.brand{font-size:1.15rem}.top nav .btn{padding:8px 12px;font-size:.9rem}}
+.top nav{display:flex;align-items:center;gap:22px}
+.top nav a{color:var(--ink);text-decoration:none;font-weight:500}
+.top nav a:hover{color:var(--blue)}
+.top nav .btn{padding:9px 16px;color:#fff;box-shadow:none}
+@media (max-width:760px){.top nav a:not(.btn){display:none}}
 
-/* Hero slab */
-.slab{position:relative;overflow:hidden;color:#fff;
-  background:
-   radial-gradient(circle at 12% 30%,rgba(0,0,0,.18) 0 2px,transparent 3px) 0 0/23px 19px,
-   radial-gradient(circle at 70% 60%,rgba(0,0,0,.14) 0 1.5px,transparent 2.5px) 0 0/17px 29px,
-   radial-gradient(ellipse at 80% 20%,rgba(40,50,20,.35),transparent 55%),
-   radial-gradient(ellipse at 20% 90%,rgba(30,25,10,.4),transparent 60%),
-   linear-gradient(160deg,var(--grime),var(--grime-dark));
-}
-.stripe{position:absolute;top:-20%;bottom:-20%;left:54%;width:clamp(120px,22vw,260px);transform:rotate(14deg);
-  background:
-   repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 9px),
-   linear-gradient(90deg,transparent,var(--clean) 6%,var(--clean) 94%,transparent);
-  box-shadow:0 0 40px rgba(255,255,255,.15);
-  animation:wash 1.6s cubic-bezier(.2,.7,.2,1) both}
-@keyframes wash{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
-@media (prefers-reduced-motion:reduce){.stripe{animation:none}}
-.slab .wrap{position:relative;padding-block:clamp(56px,10vw,110px)}
-.slab .label{color:rgba(255,255,255,.8)}
-.slab h1{font-size:clamp(3.2rem,11vw,7.5rem);font-weight:900;text-transform:uppercase;margin-top:14px;max-width:11ch;text-shadow:0 2px 0 rgba(0,0,0,.25)}
-.slab h1 em{font-style:normal;color:var(--hivis)}
-.slab .lede{margin-top:20px;max-width:34ch;font-size:1.15rem;color:rgba(255,255,255,.92)}
-.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.btn{display:inline-flex;align-items:center;gap:8px;font:700 1rem var(--body);padding:13px 22px;border-radius:4px;border:2px solid transparent;cursor:pointer;text-decoration:none}
-.btn-primary{background:var(--hivis);color:#1a1400}
-.btn-ghost{background:rgba(0,0,0,.25);color:#fff;border-color:rgba(255,255,255,.6)}
-.btn-accent{background:var(--accent);color:var(--accent-ink)}
+/* Hero */
+.hero{position:relative;overflow:hidden;padding-block:clamp(36px,7vw,80px) clamp(48px,8vw,96px)}
+.hero::before{content:"";position:absolute;inset:-30% -10% auto auto;width:70vw;height:70vw;max-width:760px;max-height:760px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--blue) 18%,transparent),transparent 65%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+@media (max-width:880px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(2.6rem,6.4vw,4.6rem);font-weight:800;margin-top:16px}
+.hero h1 .hl{position:relative;white-space:nowrap;color:var(--blue)}
+.hero h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.22em;background:var(--sun);border-radius:4px;z-index:-1;transform-origin:left;animation:swipe .9s .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes swipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero .lede{margin-top:18px;font-size:1.18rem;color:var(--muted);max-width:40ch}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;color:var(--muted);font-weight:500;font-size:.95rem}
+.trust span{display:inline-flex;align-items:center;gap:7px}
+.trust svg{width:18px;height:18px;color:var(--green)}
+
+/* Wash card (before/after) */
+.washcard{position:relative;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:#777;aspect-ratio:4/3.4;touch-action:pan-y;user-select:none;-webkit-user-select:none;border:6px solid var(--surface)}
+.washcard canvas{display:block;width:100%;height:100%}
+.tag{position:absolute;top:14px;padding:5px 12px;border-radius:999px;font-weight:700;font-size:.8rem;background:rgba(16,38,58,.75);color:#fff;pointer-events:none}
+.tag.before{right:14px}.tag.after{left:14px;background:var(--blue)}
+.handle{position:absolute;top:0;bottom:0;width:4px;margin-left:-2px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.3);pointer-events:none}
+.handle::after{content:"";position:absolute;top:50%;left:50%;width:46px;height:46px;transform:translate(-50%,-50%);border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b6fc2' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E") center/24px no-repeat;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.92);color:#10263a;font-weight:700;font-size:.8rem;padding:6px 12px;border-radius:999px;pointer-events:none;transition:opacity .4s}
 
 /* Sections */
-section.block{padding-block:clamp(56px,8vw,96px)}
-.head{display:grid;gap:10px;margin-bottom:36px;max-width:640px}
-.head h2{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:900;text-transform:uppercase}
+section.block{padding-block:clamp(56px,8vw,100px)}
+.head{display:grid;gap:12px;justify-items:start;margin-bottom:40px;max-width:680px}
+.head.center{justify-items:center;text-align:center;margin-inline:auto}
+.head h2{font-size:clamp(2.1rem,5vw,3.2rem);font-weight:800}
+.head p{color:var(--muted);font-size:1.08rem}
 
-.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:2px;background:var(--line);border:2px solid var(--line)}
-.svc{background:var(--surface);padding:28px 26px;display:grid;gap:12px;align-content:start;min-width:0}
-.svc h3{font-size:2rem;font-weight:700;text-transform:uppercase}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:22px}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px;display:grid;gap:12px;align-content:start;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease;min-width:0}
+.svc:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,38,58,.16)}
+.icon{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;background:var(--tint);color:var(--blue)}
+.icon svg{width:34px;height:34px}
+.svc:hover .icon svg{animation:wiggle .6s ease}
+@keyframes wiggle{25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+.svc h3{font-size:1.55rem;font-weight:800}
 .svc p{color:var(--muted)}
-.svc .why{font-family:var(--mono);font-size:.8rem;color:var(--ink);border-top:1px dashed var(--line);padding-top:12px}
+.svc ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.svc li{display:flex;gap:8px;align-items:flex-start;font-weight:500}
+.svc li::before{content:"";flex:none;width:18px;height:18px;margin-top:4px;border-radius:50%;background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat}
 
-/* Free estimate band */
-.free{background:var(--ink);color:var(--bg)}
-.free .wrap{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;padding-block:40px}
-.free h2{font-size:clamp(2rem,5vw,3rem);font-weight:900;text-transform:uppercase}
-.free h2 em{font-style:normal;color:var(--hivis)}
-.free p{color:var(--bg);opacity:.8;margin-top:6px}
+/* Free band with falling drops */
+.band{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--blue),#0a4f8c);color:#fff;border-radius:28px;margin-inline:20px;max-width:1080px}
+@media (min-width:1120px){.band{margin-inline:auto}}
+.band .inner{position:relative;display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:space-between;padding:clamp(32px,5vw,52px)}
+.band h2{font-size:clamp(1.9rem,4.4vw,2.8rem);font-weight:800}
+.band h2 em{font-style:normal;color:var(--sun)}
+.band p{opacity:.9;margin-top:8px;max-width:46ch}
+.drops{position:absolute;inset:0;pointer-events:none}
+.drops i{position:absolute;top:-20px;width:8px;height:12px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:rgba(255,255,255,.35);animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(340px);opacity:0}}
 
-/* How it works */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:28px;counter-reset:s}
-.step{display:grid;gap:8px;min-width:0}
-.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--display);font-weight:900;font-size:3rem;color:var(--accent);line-height:1}
-.step h3{font-size:1.5rem;font-weight:700;text-transform:uppercase}
-.step p{color:var(--muted)}
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:22px;counter-reset:s}
+.step{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:26px 22px 22px;min-width:0}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:var(--sun);color:var(--sun-ink);font:800 1.3rem var(--display);margin-bottom:14px}
+.step h3{font-size:1.3rem;font-weight:800}
+.step p{color:var(--muted);margin-top:6px}
 
-/* Contact */
-.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:40px;align-items:start}
-.phonecard{background:var(--surface);border:2px solid var(--line);border-radius:6px;padding:28px;display:grid;gap:14px}
-.phone{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,8vw,3.4rem);letter-spacing:.02em;user-select:all;font-variant-numeric:tabular-nums}
+/* FAQ */
+.faq{display:grid;gap:12px;max-width:780px;margin-inline:auto}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 20px}
+.faq summary{cursor:pointer;list-style:none;font-weight:700;font-size:1.06rem;padding:14px 0;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:800 1.4rem/1 var(--display);color:var(--blue);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);padding-bottom:16px}
+
+/* Estimate */
+.contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:start}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:var(--shadow)}
+.phonecard{display:grid;gap:16px;background:linear-gradient(160deg,var(--tint),var(--surface))}
+.phone{font:800 clamp(2rem,6vw,2.7rem)/1 var(--display);letter-spacing:.01em;font-variant-numeric:tabular-nums}
 .row{display:flex;flex-wrap:wrap;gap:10px}
-.btn-line{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn-line:hover{border-color:var(--accent)}
-.area{display:grid;gap:4px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted)}
-.area strong{color:var(--ink)}
-
-form{display:grid;gap:14px}
-.field{display:grid;gap:6px}
-.field label{font-weight:700;font-size:.9rem}
-input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:4px;padding:11px 12px;width:100%}
-input:focus,select:focus,textarea:focus{border-color:var(--accent);outline:none}
-.checks{display:flex;flex-wrap:wrap;gap:8px}
+.area{border-top:1px solid var(--line);padding-top:14px;color:var(--muted)}
+.area strong{display:block;color:var(--ink)}
+form{display:grid;gap:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:520px){.two{grid-template-columns:1fr}}
+.field{display:grid;gap:6px;min-width:0}
+.field label,.field .lbl{font-weight:700;font-size:.92rem}
+.opt{font-weight:400;color:var(--muted)}
+input,textarea{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;transition:border-color .15s,box-shadow .15s}
+input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 18%,transparent)}
+.checks{display:flex;flex-wrap:wrap;gap:10px}
 .chip{position:relative}
 .chip input{position:absolute;opacity:0;width:1px;height:1px}
-.chip span{display:inline-block;padding:8px 14px;border:2px solid var(--line);border-radius:999px;cursor:pointer;font-size:.9rem;background:var(--surface)}
-.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.chip input:focus-visible+span{outline:3px solid var(--hivis);outline-offset:2px}
-.out{display:grid;gap:10px;background:var(--surface);border:2px dashed var(--accent);border-radius:6px;padding:18px}
-.out pre{margin:0;white-space:pre-wrap;font-family:var(--mono);font-size:.85rem}
-.err{color:#c0392b;font-size:.9rem}
+.chip span{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border:2px solid var(--line);border-radius:999px;cursor:pointer;font-weight:600;background:var(--bg);transition:all .15s}
+.chip input:checked+span{background:var(--blue);border-color:var(--blue);color:#fff;transform:scale(1.04)}
+.chip input:focus-visible+span{outline:3px solid var(--sun);outline-offset:2px}
+.err{color:#d23c3c;font-weight:600;font-size:.93rem}
+.small{font-size:.85rem;color:var(--muted)}
+button[disabled]{opacity:.7;cursor:progress}
+.spin{width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.done{display:grid;justify-items:center;text-align:center;gap:12px;padding:30px 10px}
+.done svg{width:84px;height:84px}
+.done circle{stroke:var(--green);stroke-width:5;fill:none;stroke-dasharray:240;stroke-dashoffset:240;animation:draw .7s ease forwards}
+.done path{stroke:var(--green);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .4s .6s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done h3{font-size:1.7rem;font-weight:800}
+.done p{color:var(--muted);max-width:36ch}
 
-footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.9rem}
+footer{border-top:1px solid var(--line);padding-block:30px 110px;color:var(--muted);font-size:.95rem}
+@media (min-width:761px){footer{padding-bottom:30px}}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+
+/* Mobile dock */
+.dock{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px;padding:8px;border-radius:20px;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.2);border:1px solid var(--line);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.dock.show{transform:none}
+.dock .btn{padding:12px 8px;font-size:.95rem;box-shadow:none}
+@media (min-width:761px){.dock{display:none}}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
 </style>
-<style>body{margin:0}</style>
 </head>
 <body>
 
-<header class="top">
+<header class="top" id="hdr">
   <div class="wrap">
-    <a class="brand" href="#top">Pressure <span>Cut's</span></a>
-    <nav>
+    <a class="brand" href="#top" aria-label="Pressure Cut's home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0b6fc2"/><path d="M32 12c7 10 13 17 13 25a13 13 0 0 1-26 0c0-8 6-15 13-25z" fill="#fff"/><path d="M26 39a6 6 0 0 0 6 6" stroke="#ffc531" stroke-width="4" stroke-linecap="round" fill="none"/></svg>
+      Pressure Cut's
+    </a>
+    <nav aria-label="Main">
       <a href="#services">Services</a>
       <a href="#how">How it works</a>
-      <a href="#estimate">Estimate</a>
-      <a class="navcall" href="tel:+13528162574">Call / Text</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-blue" href="#estimate">Free estimate</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
-  <section class="slab" aria-label="Introduction">
-    <div class="stripe" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="label">Chesterfield, MO &amp; surrounding area</div>
-      <h1>See the <em>line</em> we leave behind.</h1>
-      <p class="lede">Professional pressure washing for driveways, plus gutter and dryer vent cleaning. Every job starts with a free estimate.</p>
-      <div class="ctas">
-        <a class="btn btn-primary" href="#estimate">Get a free estimate</a>
-        <a class="btn btn-ghost" href="tel:+13528162574">352-816-2574</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="services">
-    <div class="wrap">
-      <div class="head">
-        <div class="label">What we do</div>
-        <h2>Three jobs, done right</h2>
-      </div>
-      <div class="services">
-        <article class="svc">
-          <div class="label">Concrete</div>
-          <h3>Driveway Cleaning</h3>
-          <p>We lift the oil spots, tire marks, mildew and years of grime out of your concrete so the whole driveway comes back to one even color.</p>
-          <p class="why">Clean concrete is less slick when wet and makes the whole house look cared for.</p>
-        </article>
-        <article class="svc">
-          <div class="label">Roofline</div>
-          <h3>Gutter Cleaning</h3>
-          <p>Residential gutters cleared of leaves, seed pods and packed debris, with downspouts flushed so water actually leaves the roof.</p>
-          <p class="why">Clogged gutters overflow toward your foundation and fascia boards.</p>
-        </article>
-        <article class="svc">
-          <div class="label">Laundry room</div>
-          <h3>Dryer Vent Cleaning</h3>
-          <p>We clear built-up lint from the vent line between your dryer and the outside wall, so hot air moves out the way it should.</p>
-          <p class="why">Lint buildup slows drying and is a leading cause of home dryer fires.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="free" aria-label="Free estimates">
+  <section class="hero">
     <div class="wrap">
       <div>
-        <h2>Estimates are <em>always free.</em></h2>
-        <p>Tell us what needs cleaning and we'll give you a straight price before any work starts.</p>
+        <span class="eyebrow reveal">👋 Locally owned in Chesterfield, MO</span>
+        <h1 class="reveal d1">Let's make your home <span class="hl">shine again.</span></h1>
+        <p class="lede reveal d2">Driveway pressure washing, gutter cleaning and dryer vent cleaning, done carefully and with a smile. Every job starts with a free, no-pressure estimate.</p>
+        <div class="ctas reveal d3">
+          <a class="btn btn-sun" href="#estimate">Get my free estimate</a>
+          <a class="btn btn-line" href="tel:+13528162574">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+            352-816-2574
+          </a>
+        </div>
+        <div class="trust reveal d3">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Free estimates</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Calls &amp; texts welcome</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>You check the work before we leave</span>
+        </div>
       </div>
-      <a class="btn btn-primary" href="#estimate">Request yours</a>
+      <div class="washcard reveal d2" id="wash" role="img" aria-label="Before and after: a dirty driveway being pressure washed clean. Drag to compare.">
+        <canvas id="washCanvas"></canvas>
+        <span class="tag after">After</span>
+        <span class="tag before">Before</span>
+        <div class="handle" id="handle"></div>
+        <div class="hint" id="hint">Drag to compare</div>
+      </div>
     </div>
   </section>
+
+  <section class="block" id="services" style="padding-top:20px">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>Three services, done right</h2>
+        <p>We keep it simple: a few jobs we do really well, with careful prep and a clean-up you'll notice.</p>
+      </div>
+      <div class="services">
+        <article class="svc reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16l1.5-5a2 2 0 0 1 1.9-1.4h7.2a2 2 0 0 1 1.9 1.4L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7" cy="18" r=".6"/><circle cx="17" cy="18" r=".6"/><path d="M8 4c.6 1 .6 2 0 3M12 3c.6 1 .6 2 0 3M16 4c.6 1 .6 2 0 3"/></svg></div>
+          <h3>Driveway Cleaning</h3>
+          <p>Oil spots, tire marks, mildew and years of grime lifted out of your concrete.</p>
+          <ul><li>Even, like-new color</li><li>Less slick when wet</li><li>Instant curb appeal</li></ul>
+        </article>
+        <article class="svc reveal d1">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10l10-7 10 7"/><path d="M3 10h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M18 14v6"/><path d="M16 21h4"/></svg></div>
+          <h3>Gutter Cleaning</h3>
+          <p>Leaves, seed pods and packed debris cleared out, downspouts flushed so water leaves the roof.</p>
+          <ul><li>Protects your foundation</li><li>No more overflow</li><li>Great before fall &amp; spring</li></ul>
+        </article>
+        <article class="svc reveal d2">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M8 5h.01M11 5h.01"/><path d="M10 12c1-1 3 1 4 0"/></svg></div>
+          <h3>Dryer Vent Cleaning</h3>
+          <p>Built-up lint cleared from the vent line between your dryer and the outside wall.</p>
+          <ul><li>Faster drying</li><li>Less strain on your dryer</li><li>Lower fire risk</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="band reveal" aria-label="Free estimates">
+    <div class="drops" id="drops" aria-hidden="true"></div>
+    <div class="inner">
+      <div>
+        <h2>Estimates are <em>always free.</em></h2>
+        <p>Tell us what needs cleaning and we'll give you a straight, friendly price before any work starts. No pressure (well, except the water).</p>
+      </div>
+      <a class="btn btn-sun" href="#estimate">Request yours</a>
+    </div>
+  </div>
 
   <section class="block" id="how">
     <div class="wrap">
-      <div class="head">
-        <div class="label">How it works</div>
-        <h2>From call to clean</h2>
+      <div class="head center reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>From hello to spotless</h2>
       </div>
       <div class="steps">
-        <div class="step"><h3>Call or text</h3><p>Reach us at 352-816-2574 or send the estimate form below.</p></div>
-        <div class="step"><h3>Free estimate</h3><p>We look at the job and give you a clear price up front.</p></div>
-        <div class="step"><h3>We clean</h3><p>We show up on the day we agree to and get to work.</p></div>
-        <div class="step"><h3>You check it</h3><p>Walk the job with us before we pack up.</p></div>
+        <div class="step reveal"><h3>Reach out</h3><p>Call, text 352-816-2574, or send the quick form below.</p></div>
+        <div class="step reveal d1"><h3>Free estimate</h3><p>We take a look and give you a clear price up front.</p></div>
+        <div class="step reveal d2"><h3>We clean</h3><p>We show up on the day we agree to and get to work.</p></div>
+        <div class="step reveal d3"><h3>You check it</h3><p>Walk the job with us. We're not done until you're happy.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="head center reveal">
+        <span class="eyebrow">Questions</span>
+        <h2>Good to know</h2>
+      </div>
+      <div class="faq">
+        <details class="reveal"><summary>How much does it cost?</summary><p>Every home is different, so we give you a free estimate first. You'll know the price before any work starts.</p></details>
+        <details class="reveal"><summary>Where do you work?</summary><p>Chesterfield, MO and the surrounding area. Not sure if you're in range? Call or text and ask.</p></details>
+        <details class="reveal"><summary>Do I need to be home?</summary><p>For driveways and gutters, not necessarily. We just need water access. For dryer vents, someone needs to let us in.</p></details>
+        <details class="reveal"><summary>How fast will I hear back?</summary><p>Usually the same day. If it's urgent, calling or texting is the quickest way to reach us.</p></details>
       </div>
     </div>
   </section>
 
   <section class="block" id="estimate" style="padding-top:0">
     <div class="wrap">
-      <div class="head">
-        <div class="label">Free estimate</div>
+      <div class="head reveal">
+        <span class="eyebrow">Free estimate</span>
         <h2>Let's get you a price</h2>
+        <p>Fill this out and it comes straight to us. We'll reach back out soon.</p>
       </div>
       <div class="contact">
-        <div class="phonecard">
-          <div class="label">Call or text</div>
-          <div class="phone" id="phone">352-816-2574</div>
+        <div class="card phonecard reveal">
+          <strong>Rather talk? Call or text</strong>
+          <div class="phone">352-816-2574</div>
           <div class="row">
-            <a class="btn btn-accent" href="tel:+13528162574">Call</a>
+            <a class="btn btn-blue" href="tel:+13528162574">Call</a>
             <a class="btn btn-line" href="sms:+13528162574">Text</a>
-            <button class="btn btn-line" type="button" id="copyPhone">Copy number</button>
           </div>
-          <div class="area">
-            <strong>Service area</strong>
-            Chesterfield, MO and the surrounding area. Not sure if you're in range? Just ask.
-          </div>
-          <div class="area">
-            <strong>Facebook</strong>
-            Follow Pressure Cut's on Facebook for recent jobs and before-and-after photos.
-          </div>
+          <div class="area"><strong>Service area</strong>Chesterfield, MO and nearby. Just ask if you're unsure.</div>
+          <div class="area"><strong>Facebook</strong>Follow Pressure Cut's on Facebook for recent jobs and before-and-afters.</div>
         </div>
 
-        <form id="estForm" novalidate>
-          <div class="field">
-            <label for="name">Your name</label>
-            <input id="name" autocomplete="name" placeholder="Jane Smith">
-          </div>
-          <div class="field">
-            <label for="addr">Street address or neighborhood</label>
-            <input id="addr" autocomplete="street-address" placeholder="Chesterfield, MO">
-          </div>
-          <div class="field">
-            <span style="font-weight:700;font-size:.9rem">What needs cleaning?</span>
-            <div class="checks">
-              <label class="chip"><input type="checkbox" id="s1" value="Driveway"><span>Driveway</span></label>
-              <label class="chip"><input type="checkbox" id="s2" value="Gutters"><span>Gutters</span></label>
-              <label class="chip"><input type="checkbox" id="s3" value="Dryer vent"><span>Dryer vent</span></label>
+        <div class="card reveal d1" id="formCard">
+          <form id="estForm" novalidate>
+            <div class="two">
+              <div class="field"><label for="name">Your name</label><input id="name" autocomplete="name" placeholder="Jane Smith" required></div>
+              <div class="field"><label for="cphone">Phone number</label><input id="cphone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(314) 555-0123" required></div>
             </div>
-          </div>
-          <div class="field">
-            <label for="notes">Anything we should know?</label>
-            <textarea id="notes" rows="3" placeholder="Two-car driveway, oil stain near the garage"></textarea>
-          </div>
-          <p class="err" id="err" hidden>Add your name and pick at least one service.</p>
-          <button class="btn btn-accent" type="submit">Write my estimate request</button>
-          <div class="out" id="out" hidden>
-            <div class="label">Send this as a text to 352-816-2574</div>
-            <pre id="msg"></pre>
-            <div class="row">
-              <button class="btn btn-accent" type="button" id="copyMsg">Copy message</button>
-              <a class="btn btn-line" id="smsLink" href="sms:+13528162574">Open in Messages</a>
+            <div class="two">
+              <div class="field"><label for="email">Email <span class="opt">(optional)</span></label><input id="email" type="email" autocomplete="email" placeholder="you@email.com"></div>
+              <div class="field"><label for="addr">Address or neighborhood</label><input id="addr" autocomplete="street-address" placeholder="Chesterfield, MO"></div>
             </div>
+            <div class="field">
+              <span class="lbl">What needs cleaning?</span>
+              <div class="checks">
+                <label class="chip"><input type="checkbox" value="Driveway"><span>🚗 Driveway</span></label>
+                <label class="chip"><input type="checkbox" value="Gutters"><span>🍂 Gutters</span></label>
+                <label class="chip"><input type="checkbox" value="Dryer vent"><span>🌀 Dryer vent</span></label>
+              </div>
+            </div>
+            <div class="field"><label for="notes">Anything we should know? <span class="opt">(optional)</span></label><textarea id="notes" rows="3" placeholder="Two-car driveway, oil stain near the garage"></textarea></div>
+            <input type="checkbox" id="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="err" id="err" role="alert" hidden></p>
+            <button class="btn btn-sun" type="submit" id="sendBtn">Send my estimate request</button>
+            <p class="small">We only use your info to get back to you about your estimate.</p>
+          </form>
+          <div class="done" id="done" hidden>
+            <svg viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="37"/><path d="M26 43l11 11 21-23"/></svg>
+            <h3>Got it, thank you!</h3>
+            <p id="doneMsg">Your request is on its way. We'll call or text you soon.</p>
+            <button class="btn btn-line" type="button" id="again">Send another request</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </section>
@@ -276,38 +369,181 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 <footer>
   <div class="wrap">
     <span>© 2026 Pressure Cut's · Chesterfield, MO</span>
-    <span>352-816-2574 · Calls &amp; texts welcome</span>
+    <span><a href="tel:+13528162574">352-816-2574</a> · Calls &amp; texts welcome</span>
   </div>
 </footer>
 
-<script>
-function copy(text, btn){
-  const done=()=>{const o=btn.textContent;btn.textContent="Copied";setTimeout(()=>btn.textContent=o,1600)};
-  try{navigator.clipboard.writeText(text).then(done).catch(()=>sel())}catch(e){sel()}
-  function sel(){const el=btn.dataset.target?document.getElementById(btn.dataset.target):null;if(el){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent="Selected, press copy"}}
-}
-const cp=document.getElementById("copyPhone");cp.dataset.target="phone";
-cp.addEventListener("click",()=>copy("352-816-2574",cp));
+<nav class="dock" id="dock" aria-label="Quick contact">
+  <a class="btn btn-line" href="tel:+13528162574">📞 Call</a>
+  <a class="btn btn-line" href="sms:+13528162574">💬 Text</a>
+  <a class="btn btn-sun" href="#estimate">Free estimate</a>
+</nav>
 
-const form=document.getElementById("estForm");
-form.addEventListener("submit",e=>{
+<script>
+(function(){
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* Header + dock on scroll */
+const hdr=document.getElementById("hdr"), dock=document.getElementById("dock"), est=document.getElementById("estimate");
+let estVisible=false;
+function onScroll(){
+  hdr.classList.toggle("scrolled", scrollY>8);
+  dock.classList.toggle("show", scrollY>420 && !estVisible);
+}
+addEventListener("scroll", onScroll, {passive:true});
+if("IntersectionObserver" in window){
+  new IntersectionObserver(e=>{estVisible=e[0].isIntersecting;onScroll()},{threshold:.15}).observe(est);
+}
+onScroll();
+
+/* Scroll reveal */
+const els=document.querySelectorAll(".reveal");
+if(reduce || !("IntersectionObserver" in window)){els.forEach(e=>e.classList.add("in"))}
+else{
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12,rootMargin:"0px 0px -40px 0px"});
+  els.forEach(e=>io.observe(e));
+}
+
+/* Falling drops in the band */
+const drops=document.getElementById("drops");
+if(!reduce){
+  for(let i=0;i<18;i++){
+    const d=document.createElement("i");
+    d.style.left=(Math.random()*100)+"%";
+    d.style.animationDuration=(2.2+Math.random()*2.5)+"s";
+    d.style.animationDelay=(-Math.random()*4)+"s";
+    const s=.6+Math.random()*.9; d.style.transform="scale("+s+")";
+    drops.appendChild(d);
+  }
+}
+
+/* Before / after washer */
+const card=document.getElementById("wash"), cv=document.getElementById("washCanvas"), ctx=cv.getContext("2d");
+const handle=document.getElementById("handle"), hint=document.getElementById("hint");
+let W=0,H=0,dpr=1,dirty=null,clean=null,pos=.5,auto=!reduce,dragging=false,parts=[],t0=performance.now();
+
+function rnd(seed){return function(){seed=(seed*16807)%2147483647;return(seed-1)/2147483646}}
+function slab(isDirty){
+  const c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d");
+  const r=rnd(isDirty?7:11);
+  g.fillStyle=isDirty?"#8d8879":"#d9dcdb";g.fillRect(0,0,W,H);
+  // grain
+  const n=Math.floor(W*H/(isDirty?60:140));
+  for(let i=0;i<n;i++){
+    const v=isDirty?(r()*60-30):(r()*24-12);
+    const base=isDirty?140:216;
+    const k=Math.max(0,Math.min(255,base+v));
+    g.fillStyle="rgba("+k+","+k+","+(k-6)+","+(isDirty?.5:.35)+")";
+    g.fillRect(r()*W,r()*H,1.4*dpr,1.4*dpr);
+  }
+  if(isDirty){
+    for(let i=0;i<9;i++){ // mildew
+      const x=r()*W,y=r()*H,rad=(.08+r()*.14)*W;
+      const gr=g.createRadialGradient(x,y,0,x,y,rad);
+      gr.addColorStop(0,"rgba(62,74,34,.45)");gr.addColorStop(1,"rgba(62,74,34,0)");
+      g.fillStyle=gr;g.fillRect(0,0,W,H);
+    }
+    for(let i=0;i<4;i++){ // oil
+      const x=W*(.15+r()*.7),y=H*(.35+r()*.55),rad=(.06+r()*.07)*W;
+      const gr=g.createRadialGradient(x,y,0,x,y,rad);
+      gr.addColorStop(0,"rgba(20,18,14,.75)");gr.addColorStop(.7,"rgba(20,18,14,.35)");gr.addColorStop(1,"rgba(20,18,14,0)");
+      g.save();g.translate(x,y);g.scale(1,.65);g.translate(-x,-y);g.fillStyle=gr;g.fillRect(0,0,W,H);g.restore();
+    }
+    g.strokeStyle="rgba(25,22,18,.28)";g.lineWidth=W*.05; // tire tracks
+    [.33,.67].forEach(f=>{g.beginPath();g.moveTo(W*f-W*.03,0);g.lineTo(W*f+W*.03,H);g.stroke()});
+    const v=g.createLinearGradient(0,0,0,H);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,.25)");g.fillStyle=v;g.fillRect(0,0,W,H);
+  }else{
+    const s=g.createLinearGradient(0,0,W,H);s.addColorStop(0,"rgba(255,255,255,.35)");s.addColorStop(.5,"rgba(255,255,255,0)");s.addColorStop(1,"rgba(180,210,235,.18)");
+    g.fillStyle=s;g.fillRect(0,0,W,H);
+  }
+  // expansion joints
+  g.strokeStyle=isDirty?"rgba(35,32,26,.8)":"rgba(120,130,136,.8)";g.lineWidth=3*dpr;
+  g.beginPath();g.moveTo(0,H*.48);g.lineTo(W,H*.44);g.stroke();
+  g.beginPath();g.moveTo(W*.5,0);g.lineTo(W*.52,H);g.stroke();
+  return c;
+}
+function size(){
+  const r=card.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);
+  W=Math.max(2,Math.round(r.width*dpr));H=Math.max(2,Math.round(r.height*dpr));
+  cv.width=W;cv.height=H;dirty=slab(true);clean=slab(false);
+}
+function draw(){
+  if(!dirty)return;
+  const x=pos*W;
+  ctx.drawImage(dirty,0,0);
+  ctx.save();ctx.beginPath();ctx.rect(0,0,x,H);ctx.clip();ctx.drawImage(clean,0,0);ctx.restore();
+  // spray particles along the edge
+  ctx.fillStyle="rgba(225,242,255,.85)";
+  parts.forEach(p=>{ctx.globalAlpha=Math.max(0,p.l);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill()});
+  ctx.globalAlpha=1;
+  handle.style.left=(pos*100)+"%";
+}
+function tick(now){
+  if(auto){
+    const t=(now-t0)/1000;
+    pos=.5+.36*Math.sin(t*.9);
+  }
+  if(!reduce && (auto||dragging)){
+    const x=pos*W;
+    for(let i=0;i<4;i++)parts.push({x:x+(Math.random()-.5)*8*dpr,y:Math.random()*H,vx:(Math.random()-.3)*3*dpr,vy:(Math.random()-.5)*2*dpr,r:(1+Math.random()*2.6)*dpr,l:1});
+  }
+  parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.08*dpr;p.l-=.035});
+  parts=parts.filter(p=>p.l>0).slice(-260);
+  draw();
+  requestAnimationFrame(tick);
+}
+function setFromEvent(e){
+  const r=card.getBoundingClientRect();
+  pos=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+}
+card.addEventListener("pointerdown",e=>{auto=false;dragging=true;hint.style.opacity=0;card.setPointerCapture(e.pointerId);setFromEvent(e)});
+card.addEventListener("pointermove",e=>{if(dragging)setFromEvent(e)});
+["pointerup","pointercancel"].forEach(ev=>card.addEventListener(ev,()=>{dragging=false}));
+card.tabIndex=0;
+card.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){auto=false;hint.style.opacity=0;pos=Math.max(0,Math.min(1,pos+(e.key==="ArrowLeft"?-.05:.05)));e.preventDefault()}});
+let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{size();draw()},150)});
+size();
+if(reduce){pos=.5;draw()}else requestAnimationFrame(tick);
+
+/* Estimate form -> Web3Forms (emails Stephen) */
+const WEB3FORMS_KEY="58dbc002-7fd9-4a33-9999-d910bd3b401c";
+const form=document.getElementById("estForm"), err=document.getElementById("err"), btn=document.getElementById("sendBtn");
+const done=document.getElementById("done");
+form.addEventListener("submit",async e=>{
   e.preventDefault();
-  const name=document.getElementById("name").value.trim();
-  const addr=document.getElementById("addr").value.trim();
-  const notes=document.getElementById("notes").value.trim();
+  const v=id=>document.getElementById(id).value.trim();
+  const name=v("name"), phone=v("cphone"), email=v("email"), addr=v("addr"), notes=v("notes");
   const svc=[...form.querySelectorAll(".chip input:checked")].map(i=>i.value);
-  const err=document.getElementById("err");
-  if(!name||!svc.length){err.hidden=false;return}
+  const miss=[];
+  if(!name)miss.push("your name");
+  if(phone.replace(/\D/g,"").length<10)miss.push("a 10-digit phone number");
+  if(!svc.length)miss.push("at least one service");
+  if(email && !/^\S+@\S+\.\S+$/.test(email))miss.push("a valid email (or leave it blank)");
+  if(miss.length){err.textContent="Please add "+(miss.length>1?miss.slice(0,-1).join(", ")+" and "+miss[miss.length-1]:miss[0])+".";err.hidden=false;return}
   err.hidden=true;
-  let m=`Hi Pressure Cut's, I'd like a free estimate.\nName: ${name}\nServices: ${svc.join(", ")}`;
-  if(addr)m+=`\nLocation: ${addr}`;
-  if(notes)m+=`\nNotes: ${notes}`;
-  document.getElementById("msg").textContent=m;
-  document.getElementById("smsLink").href="sms:+13528162574?&body="+encodeURIComponent(m);
-  document.getElementById("out").hidden=false;
+  const label=btn.innerHTML;btn.disabled=true;btn.innerHTML='<span class="spin" aria-hidden="true"></span> Sending…';
+  try{
+    const payload={
+      access_key:WEB3FORMS_KEY,
+      subject:"New estimate request: "+name+" ("+svc.join(", ")+")",
+      from_name:"Pressure Cut's website",
+      Name:name, Phone:phone, Services:svc.join(", "),
+      Location:addr||"Not given", Notes:notes||"None",
+      botcheck:document.getElementById("botcheck").checked
+    };
+    if(email){payload.email=email;payload.replyto=email}
+    const res=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok||!data.success)throw new Error(data.message||"send failed");
+    document.getElementById("doneMsg").textContent="Thanks, "+name.split(" ")[0]+"! Your request is on its way. We'll call or text you at "+phone+" soon.";
+    form.hidden=true;done.hidden=false;
+  }catch(ex){
+    err.innerHTML='Sorry, that didn\'t go through. Please call or text <a href="tel:+13528162574">352-816-2574</a> instead.';
+    err.hidden=false;
+  }finally{btn.disabled=false;btn.innerHTML=label}
 });
-const cm=document.getElementById("copyMsg");cm.dataset.target="msg";
-cm.addEventListener("click",()=>copy(document.getElementById("msg").textContent,cm));
+document.getElementById("again").addEventListener("click",()=>{form.reset();done.hidden=true;form.hidden=false});
+})();
 </script>
 </body>
 </html>
