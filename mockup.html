@@ -80,7 +80,7 @@ footer{color:var(--mute);font-size:13px;text-align:center;padding:40px 16px}
 <div class="studio">
 <section class="stage" aria-label="Mockup preview">
 <canvas id="cv" width="1000" height="750" aria-label="Mockup preview of your design"></canvas>
-<div class="row" style="justify-content:center;gap:8px;margin-top:8px"><button class="btn ghost small" id="szMinus2" type="button">− Smaller</button><button class="btn ghost small" id="szPlus2" type="button">+ Bigger</button><button class="btn ghost small" id="cropBtn2" type="button">✂ Crop</button></div>
+<div class="row" style="justify-content:center;gap:8px;margin-top:8px"><button class="btn ghost small" id="szMinus2" type="button">− Smaller</button><button class="btn ghost small" id="szPlus2" type="button">+ Bigger</button><button class="btn ghost small" id="cropBtn2" type="button">✂ Crop</button><button class="btn gold small" id="spin360" type="button">⟳ 360° view</button></div>
 <div class="readout"><span id="summary">—</span><span class="hint">Drag the logo to move it</span></div>
 </section>
 
@@ -104,7 +104,8 @@ footer{color:var(--mute);font-size:13px;text-align:center;padding:40px 16px}
 <div class="drop" id="drop" tabindex="0" role="button" aria-label="Upload your logo"><strong>Upload your logo</strong>PNG with a transparent background works best. JPG works too.</div>
 <input type="file" id="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" class="sr">
 <label class="tog"><input type="checkbox" id="knock"> Remove white background</label>
-<div class="row"><button class="btn ghost small" id="cropBtn" type="button">✂ Crop image</button><button class="btn ghost small" id="useSample" type="button">Use sample logo</button><button class="btn ghost small" id="clearSide" type="button">Remove design</button><span class="note" id="logoName">Showing sample: GSA logo</span></div>
+<div id="wrapOpts" class="row" hidden style="gap:10px"><label class="tog"><input type="checkbox" id="wrapKeep"> Keep proportions (fill &amp; crop instead of stretch)</label><button class="btn ghost small" id="spinL" type="button">⟲ Turn cup</button><button class="btn ghost small" id="spinR" type="button">Turn cup ⟳</button></div>
+<div class="row"><button class="btn gold small" id="wrapBtn" type="button" hidden>🌀 Wrap image</button><button class="btn ghost small" id="cropBtn" type="button">✂ Crop image</button><button class="btn ghost small" id="useSample" type="button">Use sample logo</button><button class="btn ghost small" id="clearSide" type="button">Remove design</button><span class="note" id="logoName">Showing sample: GSA logo</span></div>
 </div>
 
 <div class="step"><h2><i>4</i>Print size</h2>
@@ -205,6 +206,8 @@ document.addEventListener('change',e=>{if(e.target.id==='dimW'||e.target.id==='d
 const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
 const imgs={};
 function load(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.src=src;});}
+let spinning=false;
+let WRAP={on:false,spin:0,keep:false,cache:null};
 let S={p:'tee',color:'#2350B8',colorName:'Royal blue',side:'front',d:{front:{w:8,dx:0,dy:0,logo:null,raw:null,knock:false,name:'sample',crop:null},back:{w:10,dx:0,dy:0,logo:null,raw:null,knock:false,name:'',crop:null}}};
 ['w','dx','dy','logo','raw','knock','name','crop'].forEach(k=>Object.defineProperty(S,k,{get(){return S.d[S.side][k]},set(v){S.d[S.side][k]=v}}));
 const BACK={garment:[['Upper back',10,0,-3],['Center back',10,0,0],['Full back',12,0,1],['Neck tag 3"',3,0,-6.5]],sign:null,banner:null};
@@ -241,7 +244,7 @@ function geo(){
 }
 function drawCylP(m,g,wIn,hIn){const c=m.cyl,ppi=g.ppi,w=wIn*ppi,h=hIn*ppi,cx=c.cx+S.dx*ppi,cy=g.cy+S.dy*ppi,L=S.logo;
  const R=c.rTop+(c.rBot-c.rTop)*Math.min(1,Math.max(0,(cy-c.yTop)/(c.yBot-c.yTop)));
- for(let x=Math.floor(c.cx-R);x<=Math.ceil(c.cx+R);x++){const u=(x+0.5-c.cx)/R;if(Math.abs(u)>=1)continue;const sarc=Math.asin(u)*R;const lx=sarc-(cx-c.cx)+w/2;if(lx<0||lx>=w)continue;if(Math.sqrt(1-u*u)<0.2)continue;
+ for(let x=Math.floor(c.cx-R);x<=Math.ceil(c.cx+R);x++){const u=(x+0.5-c.cx)/R;if(Math.abs(u)>=1)continue;let ang=Math.asin(u)+WRAP.spin;ang-=2*Math.PI*Math.round(ang/(2*Math.PI));const sarc=ang*R;const lx=sarc-(cx-c.cx)+w/2;if(lx<0||lx>=w)continue;if(Math.sqrt(1-u*u)<0.2)continue;
   const sx=lx/w*L.width;tctx.drawImage(L,sx,0,Math.max(1,Math.min(L.width/w/Math.max(Math.sqrt(1-u*u),0.25),L.width-sx)),L.height,x,cy-h/2,1.05,h);}}
 function logoSizeIn(){const L=S.logo;return [S.w,S.w*L.height/L.width];}
 
@@ -279,13 +282,29 @@ function draw(){
  if(!window.__snap){drawGuides();drawSel();}
  summary();
 }
+function isWrap(){return S.p==='tumbler'&&WRAP.on&&!!S.logo;}
+function drawWrap(m){const c=m.cyl,L=S.logo;if(!WRAP.cache||WRAP.cache.src!==L){const t=document.createElement('canvas');t.width=L.width;t.height=L.height;const x=t.getContext('2d');x.drawImage(L,0,0);WRAP.cache={src:L,d:x.getImageData(0,0,L.width,L.height).data,w:L.width,h:L.height};}
+ const {d,w:lw,h:lh}=WRAP.cache,y0=c.yTop+8,y1=c.yBot-22,H=y1-y0,out=tctx.createImageData(m.w,m.h),o=out.data;
+ // keep proportions: crop source to wrap-area aspect (circumference : height)
+ const Rm=(c.rTop+c.rBot)/2,aspect=2*Math.PI*Rm/H;let sx0=0,sw=lw,sy0=0,sh=lh;
+ if(WRAP.keep){if(lw/lh>aspect){sw=lh*aspect;sx0=(lw-sw)/2;}else{sh=lw/aspect;sy0=(lh-sh)/2;}}
+ for(let y=Math.ceil(y0);y<y1;y++){const R=c.rTop+(c.rBot-c.rTop)*(y-c.yTop)/(c.yBot-c.yTop)-1.5;const v=(y-y0)/H;const sy=Math.min(lh-1,Math.floor(sy0+v*sh));
+  for(let x=Math.ceil(c.cx-R);x<=Math.floor(c.cx+R);x++){const u=(x+0.5-c.cx)/R;if(u<=-1||u>=1)continue;let t=(Math.asin(u)+WRAP.spin)/(2*Math.PI)+0.5;t-=Math.floor(t);
+   const sx=Math.min(lw-1,Math.floor(sx0+t*sw));const si=(sy*lw+sx)*4,di=(y*m.w+x)*4;const edge=Math.min(1,(1-Math.abs(u))*R/1.2);
+   const n=Math.sqrt(1-u*u),sh=0.62+0.38*n+0.18*Math.exp(-(((u+0.45)/0.09)**2));o[di]=Math.min(255,d[si]*sh);o[di+1]=Math.min(255,d[si+1]*sh);o[di+2]=Math.min(255,d[si+2]*sh);o[di+3]=d[si+3]*edge;}}
+ tctx.putImageData(out,0,0);}
+function syncWrapUI(){const t=S.p==='tumbler';document.getElementById('wrapBtn').hidden=!t;document.getElementById('wrapOpts').hidden=!(t&&WRAP.on);
+ const b=document.getElementById('wrapBtn');b.textContent=WRAP.on?'↩ Undo wrap (back to logo)':'🌀 Wrap image';b.className='btn small '+(WRAP.on?'ghost':'gold');}
+document.getElementById('wrapBtn').onclick=()=>{if(!S.logo){alert('Upload an image first.');return;}WRAP.on=!WRAP.on;WRAP.spin=0;syncWrapUI();draw();};
+document.getElementById('wrapKeep').onchange=e=>{WRAP.keep=e.target.checked;draw();};
+document.getElementById('spinL').onclick=()=>{WRAP.spin-=Math.PI/4;draw();};document.getElementById('spinR').onclick=()=>{WRAP.spin+=Math.PI/4;draw();};
 function drawPhoto(){
  const m=EM();if(cv.width!==m.w||cv.height!==m.h){cv.width=m.w;cv.height=m.h;}tmp.width=m.w;tmp.height=m.h;
  const f=photoFor(),ph=getPhoto(f);ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
  ctx.fillStyle='#ffffff';ctx.fillRect(0,0,m.w,m.h);if(!ph.complete||!ph.naturalWidth){summary();return;}
  ctx.drawImage(ph,0,0,m.w,m.h);
  if(S.logo){const g=geo(),[wIn,hIn]=logoSizeIn();tctx.setTransform(1,0,0,1,0,0);tctx.globalCompositeOperation='source-over';tctx.clearRect(0,0,m.w,m.h);
-  if(m.cyl)drawCylP(m,g,wIn,hIn);else{const w=wIn*g.ppi,h=hIn*g.ppi;tctx.drawImage(S.logo,g.cx+S.dx*g.ppi-w/2,g.cy+S.dy*g.ppi-h/2,w,h);}
+  if(isWrap())drawWrap(m);else if(m.cyl)drawCylP(m,g,wIn,hIn);else{const w=wIn*g.ppi,h=hIn*g.ppi;tctx.drawImage(S.logo,g.cx+S.dx*g.ppi-w/2,g.cy+S.dy*g.ppi-h/2,w,h);}
   // shade logo with the photo's own light & folds
   const pd=ctx.getImageData(0,0,m.w,m.h).data;
   if(refCache[f]===undefined){const v=[];for(let y=m.area.cy-40;y<m.area.cy+40;y+=4)for(let x=m.area.cx-40;x<m.area.cx+40;x+=4){const i=(y*m.w+x)*4;v.push(pd[i]*.3+pd[i+1]*.59+pd[i+2]*.11);}v.sort((a,b)=>a-b);refCache[f]=Math.max(8,v[v.length>>1]);}
@@ -311,7 +330,8 @@ function summary(){
  const P=PRODUCTS[S.p],m=META[S.p];
  let t='';
  const sideLbl=hasBack()?` · <strong>${S.side==='back'?'Back':'Front'}</strong>`:'';
- if(S.logo){const [w,h]=logoSizeIn();t=`<strong>${m.label}</strong>${sideLbl} · ${S.colorName} · logo <strong>${fmt(w)}" × ${fmt(h)}"</strong>`;} else t=`<strong>${m.label}</strong>${sideLbl} · ${S.colorName} · <em>no design on this side yet — upload one</em>`;
+ if(isWrap())t=`<strong>${m.label}</strong> · ${S.colorName} · <strong>full wrap</strong> (all the way around) · drag the cup to spin it`;
+ else if(S.logo){const [w,h]=logoSizeIn();t=`<strong>${m.label}</strong>${sideLbl} · ${S.colorName} · logo <strong>${fmt(w)}" × ${fmt(h)}"</strong>`;} else t=`<strong>${m.label}</strong>${sideLbl} · ${S.colorName} · <em>no design on this side yet — upload one</em>`;
  if(P.size)t+=` · ${P.size}`;
  document.getElementById('summary').innerHTML=t;
  const warn=document.getElementById('warn');
@@ -326,7 +346,7 @@ function fmt(v){return (Math.round(v*4)/4).toString();}
 function pressed(group,el){group.querySelectorAll('[aria-pressed]').forEach(b=>b.setAttribute('aria-pressed',b===el));}
 function buildProducts(){const g=document.getElementById('products');g.innerHTML='';
  ORDER.forEach(k=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=META[k].label;b.setAttribute('aria-pressed',k===S.p);
-  b.onclick=()=>{S.p=k;pressed(g,b);const P=PRODUCTS[k];const c=P.colors.find(x=>x[1]===P.def)||P.colors[0];S.color=c[1];S.colorName=c[0];S.d.front.w=P.sizes[1][1];S.d.front.dx=P.sizes[1][2];S.d.front.dy=P.sizes[1][3];const bs=(BACK[P.unit]||P.sizes)[1];S.d.back.w=bs[1];S.d.back.dx=bs[2];S.d.back.dy=bs[3];if(!hasBack())S.side='front';if(DIMS[k]){S.d.front.w=fitW(k,0.6);S.d.back.w=S.d.front.w;S.d.front.dx=S.d.front.dy=S.d.back.dx=S.d.back.dy=0;PRODUCTS[k].max=DIMS[k].W-2;PRODUCTS[k].size=dimLabel(k);}buildDims();buildSides();buildSwatches();buildSizes();syncLogoUI();draw();};g.appendChild(b);});}
+  b.onclick=()=>{S.p=k;pressed(g,b);const P=PRODUCTS[k];const c=P.colors.find(x=>x[1]===P.def)||P.colors[0];S.color=c[1];S.colorName=c[0];S.d.front.w=P.sizes[1][1];S.d.front.dx=P.sizes[1][2];S.d.front.dy=P.sizes[1][3];const bs=(BACK[P.unit]||P.sizes)[1];S.d.back.w=bs[1];S.d.back.dx=bs[2];S.d.back.dy=bs[3];if(!hasBack())S.side='front';if(DIMS[k]){S.d.front.w=fitW(k,0.6);S.d.back.w=S.d.front.w;S.d.front.dx=S.d.front.dy=S.d.back.dx=S.d.back.dy=0;PRODUCTS[k].max=DIMS[k].W-2;PRODUCTS[k].size=dimLabel(k);}buildDims();buildSides();syncWrapUI();buildSwatches();buildSizes();syncLogoUI();draw();};g.appendChild(b);});}
 function buildSides(){const g=document.getElementById('sides');g.innerHTML='';const show=hasBack();document.getElementById('sideRow').hidden=!show;document.getElementById('sideNote').hidden=!show;if(!show)return;
  ['front','back'].forEach(sd=>{const b=document.createElement('button');b.type='button';b.className='chip';const has=!!S.d[sd].logo;b.textContent=(sd==='front'?'Front':'Back')+(has?' ✓':'');b.setAttribute('aria-pressed',S.side===sd);b.onclick=()=>{S.side=sd;buildSides();buildSizes();syncLogoUI();draw();};g.appendChild(b);});}
 function syncLogoUI(){document.getElementById('knock').checked=!!S.knock;document.getElementById('logoName').textContent=S.logo?(S.name==='sample'?'Showing sample: GSA logo':'Using: '+S.name):'No design on the '+S.side+' yet';document.getElementById('clearSide').hidden=!S.logo;}
@@ -367,15 +387,15 @@ drop.addEventListener('drop',e=>{if(e.dataTransfer.files[0])useFile(e.dataTransf
 file.onchange=()=>{if(file.files[0])useFile(file.files[0]);};
 function useFile(f){const r=new FileReader();r.onload=async()=>{const i=await load(r.result);S.raw=i;S.name=f.name;S.crop=null;
  S.knock=/jpe?g$/i.test(f.name)||f.type==='image/jpeg';document.getElementById('knock').checked=S.knock;
- processLogo();buildSides();syncLogoUI();draw();};r.readAsDataURL(f);}
+ processLogo();buildSides();syncLogoUI();syncWrapUI();draw();};r.readAsDataURL(f);}
 document.getElementById('useSample').onclick=async()=>{S.crop=null;S.raw=imgs.sample;S.name='sample';S.knock=false;document.getElementById('knock').checked=false;processLogo();buildSides();syncLogoUI();draw();};
-document.getElementById('clearSide').onclick=()=>{S.raw=null;S.logo=null;S.name='';buildSides();syncLogoUI();draw();};
+document.getElementById('clearSide').onclick=()=>{WRAP.on=false;setTimeout(syncWrapUI);S.raw=null;S.logo=null;S.name='';buildSides();syncLogoUI();draw();};
 // selection box
 function selBox(){if(!S.logo)return null;const g=geo(),[wIn,hIn]=logoSizeIn();
  if(g.type==='affine'){const T=g.T,P=(x,y)=>[T[0]*x+T[2]*y+T[4],T[1]*x+T[3]*y+T[5]];const cx=g.cxIn+S.dx,cy=g.cyIn+S.dy;return [P(cx-wIn/2,cy-hIn/2),P(cx+wIn/2,cy-hIn/2),P(cx+wIn/2,cy+hIn/2),P(cx-wIn/2,cy+hIn/2)];}
  const cx=g.cx+S.dx*g.ppi,cy=g.cy+S.dy*g.ppi,w=wIn*g.ppi/2,h=hIn*g.ppi/2;return [[cx-w,cy-h],[cx+w,cy-h],[cx+w,cy+h],[cx-w,cy+h]];}
 function hs(){return Math.max(9,cv.width/80);}
-function drawSel(){const b=selBox();if(!b)return;ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.lineWidth=Math.max(1.5,cv.width/600);ctx.setLineDash([6,5]);ctx.strokeStyle='rgba(255,255,255,.9)';ctx.shadowColor='rgba(0,0,0,.6)';ctx.shadowBlur=3;
+function drawSel(){if(isWrap()||spinning)return;const b=selBox();if(!b)return;ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.lineWidth=Math.max(1.5,cv.width/600);ctx.setLineDash([6,5]);ctx.strokeStyle='rgba(255,255,255,.9)';ctx.shadowColor='rgba(0,0,0,.6)';ctx.shadowBlur=3;
  ctx.beginPath();b.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.stroke();ctx.setLineDash([]);const r=hs();
  b.forEach(p=>{ctx.fillStyle='#ffffff';ctx.strokeStyle='#6D4AFF';ctx.lineWidth=2;ctx.beginPath();ctx.rect(p[0]-r/2,p[1]-r/2,r,r);ctx.fill();ctx.stroke();});ctx.restore();}
 function sizeLimits(){const P=PRODUCTS[S.p];return [P.unit==='tumbler'?0.75:1,P.max];}
@@ -386,16 +406,16 @@ cv.addEventListener('wheel',e=>{if(!S.logo)return;e.preventDefault();setW(S.w*(e
 // drag
 let drag=null;const ptrs=new Map();let pinch=null;
 function cpos(e){const r=cv.getBoundingClientRect();return [(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height];}
-cv.addEventListener('pointerdown',e=>{if(!S.logo)return;ptrs.set(e.pointerId,cpos(e));cv.setPointerCapture(e.pointerId);
+cv.addEventListener('pointerdown',e=>{if(!S.logo)return;if(isWrap()){drag={spin:true,p:cpos(e),s0:WRAP.spin};cv.setPointerCapture(e.pointerId);return;}ptrs.set(e.pointerId,cpos(e));cv.setPointerCapture(e.pointerId);
  if(ptrs.size===2){const [a,b]=[...ptrs.values()];pinch={d:Math.hypot(a[0]-b[0],a[1]-b[1]),w:S.w};drag=null;return;}
  const p=cpos(e),b=selBox(),r=hs()*1.6;const ci=b?b.findIndex(c=>Math.abs(c[0]-p[0])<r&&Math.abs(c[1]-p[1])<r):-1;
  if(ci>=0){const c=[(b[0][0]+b[2][0])/2,(b[0][1]+b[2][1])/2];drag={resize:true,c,d0:Math.hypot(p[0]-c[0],p[1]-c[1]),w0:S.w};}
  else drag={p,dx:S.dx,dy:S.dy};cv.classList.add('drag');});
-cv.addEventListener('pointermove',e=>{if(!S.logo)return;const b=selBox(),p=cpos(e),r=hs()*1.6;if(!drag&&!pinch&&b)cv.style.cursor=b.some(c=>Math.abs(c[0]-p[0])<r&&Math.abs(c[1]-p[1])<r)?'nwse-resize':'grab';
+cv.addEventListener('pointermove',e=>{if(!S.logo)return;if(drag&&drag.spin){const p=cpos(e);WRAP.spin=drag.s0+(p[0]-drag.p[0])/150;draw();return;}const b=selBox(),p=cpos(e),r=hs()*1.6;if(!drag&&!pinch&&b)cv.style.cursor=b.some(c=>Math.abs(c[0]-p[0])<r&&Math.abs(c[1]-p[1])<r)?'nwse-resize':'grab';
  if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,p);
  if(pinch&&ptrs.size===2){const [a,c]=[...ptrs.values()];const d=Math.hypot(a[0]-c[0],a[1]-c[1]);setW(pinch.w*d/pinch.d);return;}
  if(drag&&drag.resize){setW(drag.w0*Math.hypot(p[0]-drag.c[0],p[1]-drag.c[1])/Math.max(4,drag.d0));}});
-cv.addEventListener('pointermove',e=>{if(!drag||drag.resize||pinch)return;const [x,y]=cpos(e),g=geo();
+cv.addEventListener('pointermove',e=>{if(!drag||drag.resize||drag.spin||pinch)return;const [x,y]=cpos(e),g=geo();
  let ddx=(x-drag.p[0])/g.ppi,ddy=(y-drag.p[1])/g.ppi;
  if(g.type==='affine'){const T=g.T,det=T[0]*T[3]-T[1]*T[2];const X=x-drag.p[0],Y=y-drag.p[1];ddx=(T[3]*X-T[2]*Y)/det;ddy=(-T[1]*X+T[0]*Y)/det;}
  let nx=drag.dx+ddx,ny=drag.dy+ddy;guides=null;
@@ -426,13 +446,23 @@ document.getElementById('cropReset').onclick=()=>{Object.assign(CR,{x:0,y:0,w:cc
 document.getElementById('cropCancel').onclick=()=>{cm.hidden=true;};
 document.getElementById('cropApply').onclick=()=>{const k=CR.k;S.crop=(CR.x<1&&CR.y<1&&CR.w>cc.width-2&&CR.h>cc.height-2)?null:{x:Math.round(CR.x/k),y:Math.round(CR.y/k),w:Math.round(CR.w/k),h:Math.round(CR.h/k)};cm.hidden=true;processLogo();draw();};
 ['cropBtn','cropBtn2'].forEach(id=>document.getElementById(id).onclick=openCrop);
+// 360 view
+function play360(){if(spinning)return;spinning=true;const btn=document.getElementById('spin360');btn.disabled=true;const t0=performance.now();
+ if(S.p==='tumbler'){const s0=WRAP.spin,D=3200;const step=t=>{const k=Math.min(1,(t-t0)/D);WRAP.spin=s0+k*2*Math.PI;draw();if(k<1)requestAnimationFrame(step);else{WRAP.spin=s0;draw();spinning=false;btn.disabled=false;}};requestAnimationFrame(step);return;}
+ const keep=S.side,back=hasBack(),D=3000;let shown='front';S.side='front';draw();
+ const step=t=>{const k=Math.min(1,(t-t0)/D),a=k*360;const want=(a>90&&a<270)?'back':'front';
+  if(want!==shown){shown=want;if(back)S.side=want;draw();}
+  const vis=a<=90?a:a<270?a-180:a-360;cv.style.transform=`perspective(1400px) rotateY(${vis}deg)`;
+  if(k<1)requestAnimationFrame(step);else{cv.style.transform='';S.side=keep;buildSides();draw();spinning=false;btn.disabled=false;}};
+ requestAnimationFrame(step);}
+document.getElementById('spin360').onclick=play360;
 // output
 function snapshot(side){const keep=S.side;S.side=side;window.__snap=1;draw();window.__snap=0;const c=document.createElement('canvas');c.width=cv.width;c.height=cv.height;c.getContext('2d').drawImage(cv,0,0);S.side=keep;draw();return c;}
 function download(){guides=null;draw();let out=cv;
  if(hasBack()&&S.d.back.logo&&S.d.front.logo){const f=snapshot('front'),b=snapshot('back');out=document.createElement('canvas');out.width=f.width*2+20;out.height=f.height+56;const x=out.getContext('2d');x.fillStyle='#ffffff';x.fillRect(0,0,out.width,out.height);x.drawImage(f,0,56);x.drawImage(b,f.width+20,56);x.fillStyle='#16181D';x.font='bold 28px Inter, sans-serif';x.fillText('FRONT',16,38);x.fillText('BACK',f.width+36,38);}
  const a=document.createElement('a');a.download=`GSA-mockup-${META[S.p].label.toLowerCase().replace(/\s+/g,'-')}.png`;a.href=out.toDataURL('image/png');document.body.appendChild(a);a.click();a.remove();}
 document.getElementById('download').onclick=download;
-function sideLine(sd){const D=S.d[sd];if(!D.logo)return 'none';const h=D.w*D.logo.height/D.logo.width;return `${fmt(D.w)}" wide x ${fmt(h)}" tall, ${D.dx===0&&D.dy===0?'centered':'placed as shown'}`;}
+function sideLine(sd){const D=S.d[sd];if(!D.logo)return 'none';if(isWrap()&&sd==='front')return 'Full wrap (image stretched all the way around)'+(WRAP.keep?', proportions kept':'');const h=D.w*D.logo.height/D.logo.width;return `${fmt(D.w)}" wide x ${fmt(h)}" tall, ${D.dx===0&&D.dy===0?'centered':'placed as shown'}`;}
 document.getElementById('quote').onclick=()=>{download();const P=PRODUCTS[S.p],m=META[S.p],[w,h]=S.logo?logoSizeIn():[0,0];
  const body=`Hi GSA,\n\nI'd like a quote for:\n\nProduct: ${m.label}${P.size?' ('+P.size+')':''}\nColor: ${S.colorName}\n${hasBack()?'Front design: '+sideLine('front')+'\nBack design: '+sideLine('back'):'Logo print size: '+sideLine('front')}\nQuantity: \nNeeded by: \n\nName: \nPhone: \n\n(I've attached my mockup and logo file.)`;
  location.href='mailto:Graphicsignsaccessories@outlook.com?subject='+encodeURIComponent('Mockup quote request – '+m.label+' – '+S.colorName)+'&body='+encodeURIComponent(body);};
