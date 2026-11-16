@@ -283,15 +283,22 @@ function draw(){
  summary();
 }
 function isWrap(){return S.p==='tumbler'&&WRAP.on&&!!S.logo;}
-function drawWrap(m){const c=m.cyl,L=S.logo;if(!WRAP.cache||WRAP.cache.src!==L){const t=document.createElement('canvas');t.width=L.width;t.height=L.height;const x=t.getContext('2d');x.drawImage(L,0,0);WRAP.cache={src:L,d:x.getImageData(0,0,L.width,L.height).data,w:L.width,h:L.height};}
- const {d,w:lw,h:lh}=WRAP.cache,y0=c.yTop+8,y1=c.yBot-22,H=y1-y0,out=tctx.createImageData(m.w,m.h),o=out.data;
- // keep proportions: crop source to wrap-area aspect (circumference : height)
- const Rm=(c.rTop+c.rBot)/2,aspect=2*Math.PI*Rm/H;let sx0=0,sw=lw,sy0=0,sh=lh;
+function drawWrap(m){const L=S.logo;if(!WRAP.cache||WRAP.cache.src!==L){const t=document.createElement('canvas');t.width=L.width;t.height=L.height;const x=t.getContext('2d');x.drawImage(L,0,0);WRAP.cache={src:L,d:x.getImageData(0,0,L.width,L.height).data,w:L.width,h:L.height};}
+ const {d,w:lw,h:lh}=WRAP.cache,out=tctx.createImageData(m.w,m.h),o=out.data;
+ // measured outline of the real tumbler photo: centre x=350, radius tapers 165px (y=345) -> 115px (y=925)
+ const CX=350,rad=y=>160-(y-400)*34/400+0.6;
+ const TOP=352,ET=9,BOT=902,EB=20; // top/bottom print edges follow the cup's elliptical rims
+ const H=BOT-TOP,Rm=rad((TOP+BOT)/2),aspect=2*Math.PI*Rm/H;let sx0=0,sw=lw,sy0=0,sh=lh;
  if(WRAP.keep){if(lw/lh>aspect){sw=lh*aspect;sx0=(lw-sw)/2;}else{sh=lw/aspect;sy0=(lh-sh)/2;}}
- for(let y=Math.ceil(y0);y<y1;y++){const R=c.rTop+(c.rBot-c.rTop)*(y-c.yTop)/(c.yBot-c.yTop)-1.5;const v=(y-y0)/H;const sy=Math.min(lh-1,Math.floor(sy0+v*sh));
-  for(let x=Math.ceil(c.cx-R);x<=Math.floor(c.cx+R);x++){const u=(x+0.5-c.cx)/R;if(u<=-1||u>=1)continue;let t=(Math.asin(u)+WRAP.spin)/(2*Math.PI)+0.5;t-=Math.floor(t);
-   const sx=Math.min(lw-1,Math.floor(sx0+t*sw));const si=(sy*lw+sx)*4,di=(y*m.w+x)*4;const edge=Math.min(1,(1-Math.abs(u))*R/1.2);
-   const n=Math.sqrt(1-u*u),sh=0.62+0.38*n+0.18*Math.exp(-(((u+0.45)/0.09)**2));o[di]=Math.min(255,d[si]*sh);o[di+1]=Math.min(255,d[si+1]*sh);o[di+2]=Math.min(255,d[si+2]*sh);o[di+3]=d[si+3]*edge;}}
+ for(let y=TOP-2;y<=BOT+EB+2;y++){const R=rad(y);
+  for(let x=Math.floor(CX-R);x<=Math.ceil(CX+R);x++){const u=(x+0.5-CX)/R;if(u<=-1||u>=1)continue;const n=Math.sqrt(1-u*u);
+   const yt=TOP+ET*n,yb=BOT+EB*n;if(y<yt-1||y>yb+1)continue;
+   const v=(y-yt)/(yb-yt);let t=(Math.asin(u)+WRAP.spin)/(2*Math.PI)+0.5;t-=Math.floor(t);
+   const sx=Math.min(lw-1,Math.floor(sx0+t*sw)),sy=Math.min(lh-1,Math.max(0,Math.floor(sy0+Math.min(1,Math.max(0,v))*sh)));
+   const si=(sy*lw+sx)*4,di=(y*m.w+x)*4;
+   const aa=Math.min(1,Math.max(0,(y-yt)+0.5),Math.max(0,(yb-y)+0.5),(1-Math.abs(u))*R);
+   const sh2=0.62+0.38*n+0.18*Math.exp(-(((u+0.45)/0.09)**2));
+   o[di]=Math.min(255,d[si]*sh2);o[di+1]=Math.min(255,d[si+1]*sh2);o[di+2]=Math.min(255,d[si+2]*sh2);o[di+3]=d[si+3]*aa;}}
  tctx.putImageData(out,0,0);}
 function syncWrapUI(){const t=S.p==='tumbler';document.getElementById('wrapBtn').hidden=!t;document.getElementById('wrapOpts').hidden=!(t&&WRAP.on);
  const b=document.getElementById('wrapBtn');b.textContent=WRAP.on?'↩ Undo wrap (back to logo)':'🌀 Wrap image';b.className='btn small '+(WRAP.on?'ghost':'gold');}
