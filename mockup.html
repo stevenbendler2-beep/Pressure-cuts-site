@@ -135,14 +135,29 @@ const PRODUCTS={
  yard:{colors:SIGNS,def:'#FFCB2E',sizes:[['8"',8,0,0],['12"',12,0,0],['18"',18,0,0],['Full 22"',22,0,0]],max:23,unit:'sign',size:'18" × 24" corrugated sign'},
  banner:{colors:SIGNS,def:'#5A2E9A',sizes:[['12"',12,0,0],['24"',24,0,0],['48"',48,0,0],['Full 66"',66,0,0]],max:70,unit:'banner',size:'2 ft × 6 ft vinyl banner'}
 };
-const ORDER=['tee','hoodie','tumbler','yard','banner'];
+const PF={"tee": [["White", "#fffefa", "tee__White.webp"], ["Black", "#141313", "tee__Black.webp"], ["Sport Grey", "#c4c0be", "tee__Sport-Grey.webp"], ["Charcoal", "#6a6967", "tee__Charcoal.webp"], ["Navy", "#1a2330", "tee__Navy.webp"], ["Royal", "#175ac7", "tee__Royal.webp"], ["Carolina Blue", "#96bbff", "tee__Carolina-Blue.webp"], ["Red", "#d80019", "tee__Red.webp"], ["Maroon", "#47001b", "tee__Maroon.webp"], ["Orange", "#ff5f2e", "tee__Orange.webp"], ["Gold", "#ffb22d", "tee__Gold.webp"], ["Irish Green", "#00ba69", "tee__Irish-Green.webp"], ["Forest Green", "#1A3B23", "tee__Forest-Green.webp"], ["Purple", "#48197d", "tee__Purple.webp"], ["Light Pink", "#ffd4d5", "tee__Light-Pink.webp"], ["Sand", "#d6c0ab", "tee__Sand.webp"]], "hoodie": [["White", "#ffffff", "hoodie__White.webp"], ["Black", "#0b0b0b", "hoodie__Black.webp"], ["Sport Grey", "#9b969c", "hoodie__Sport-Grey.webp"], ["Charcoal", "#534E4A", "hoodie__Charcoal.webp"], ["Navy", "#131928", "hoodie__Navy.webp"], ["Royal", "#1D50A4", "hoodie__Royal.webp"], ["Carolina Blue", "#8DB7F6", "hoodie__Carolina-Blue.webp"], ["Red", "#da0a1a", "hoodie__Red.webp"], ["Maroon", "#47171c", "hoodie__Maroon.webp"], ["Orange", "#FF5723", "hoodie__Orange.webp"], ["Gold", "#FFAF24", "hoodie__Gold.webp"], ["Irish Green", "#1d9345", "hoodie__Irish-Green.webp"], ["Forest Green", "#222E1F", "hoodie__Forest-Green.webp"], ["Purple", "#4A1C7D", "hoodie__Purple.webp"], ["Light Pink", "#f3d4e3", "hoodie__Light-Pink.webp"], ["Sand", "#e7d3b3", "hoodie__Sand.webp"]], "tumbler": [["Black", "#000000", "tumbler__Black.webp"], ["Mint", "#cee5bd", "tumbler__Mint.webp"], ["Navy", "#213c51", "tumbler__Navy.webp"], ["Pink", "#ffa7b1", "tumbler__Pink.webp"], ["White", "#ffffff", "tumbler__White.webp"]], "hat": [["Black", "#181818", "hat__Black.webp"], ["White", "#FFFFFF", "hat__White.webp"], ["Navy", "#24303b", "hat__Navy.webp"], ["Charcoal", "#3f3c38", "hat__Charcoal.webp"], ["Red", "#c6172f", "hat__Red.webp"], ["Khaki", "#b3a58e", "hat__Khaki.webp"], ["Black / White", "#181818", "hat__Black-White.webp"], ["Navy / White", "#24303b", "hat__Navy-White.webp"], ["Heather Grey / White", "#a4a3a3", "hat__Heather-Grey-White.webp"], ["Pink", "#dd7d9a", "hat__Pink.webp"], ["Evergreen", "#385e3d", "hat__Evergreen.webp"], ["Cranberry", "#7e293b", "hat__Cranberry.webp"]]};const PF_SRC={};const PF_BASE='src-photos/pf/';
+const PHOTO={tee:{w:700,h:1000,ppi:15.5,area:{cx:355,cy:405}},hoodie:{w:700,h:1000,ppi:16.5,area:{cx:345,cy:462}},
+ tumbler:{w:700,h:1000,ppi:92,area:{cx:350,cy:600},cyl:{cx:350,yTop:345,rTop:165,yBot:925,rBot:118}},
+ hat:{w:700,h:1000,ppi:66,area:{cx:350,cy:470},cyl:{cx:350,yTop:300,rTop:265,yBot:600,rBot:265}}};
+META.hat={label:'Hat'};
+['tee','hoodie','tumbler','hat'].forEach(k=>{META[k].photo=PHOTO[k];if(!PRODUCTS[k])PRODUCTS[k]={};PRODUCTS[k].colors=PF[k].map(c=>[c[0],c[1],c[2]]);PRODUCTS[k].def=PF[k][0][1];});
+PRODUCTS.tee.def=(PF.tee.find(c=>c[0]==='Royal')||PF.tee[0])[1];PRODUCTS.hoodie.def=(PF.hoodie.find(c=>c[0]==='Navy')||PF.hoodie[0])[1];
+PRODUCTS.tumbler.def=(PF.tumbler.find(c=>c[0]==='Mint')||PF.tumbler[0])[1];
+PRODUCTS.hat=Object.assign(PRODUCTS.hat,{def:(PF.hat.find(c=>c[0]==='Black')||PF.hat[0])[1],sizes:[['Small 2"',2,0,0],['Standard 3.5"',3.5,0,0],['Wide 4.5"',4.5,0,0]],max:4.5,unit:'hat'});
+PRODUCTS.tumbler.max=4.5;
+function isPhoto(){return !!(META[S.p].photo&&S.side==='front');}
+function EM(){return isPhoto()?Object.assign({label:META[S.p].label},META[S.p].photo):META[S.p];}
+const photoCache={},refCache={};
+function photoFor(){const c=PRODUCTS[S.p].colors.find(x=>x[1]===S.color)||PRODUCTS[S.p].colors[0];return c[2];}
+function getPhoto(f){if(photoCache[f])return photoCache[f];const i=new Image();i.onload=()=>draw();i.src=PF_SRC[f]||(PF_BASE+f);photoCache[f]=i;return i;}
+const ORDER=['tee','hoodie','tumbler','hat','yard','banner'];
 const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
 const imgs={};
 function load(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.src=src;});}
 let S={p:'tee',color:'#2350B8',colorName:'Royal blue',side:'front',d:{front:{w:8,dx:0,dy:0,logo:null,raw:null,knock:false,name:'sample'},back:{w:10,dx:0,dy:0,logo:null,raw:null,knock:false,name:''}}};
 ['w','dx','dy','logo','raw','knock','name'].forEach(k=>Object.defineProperty(S,k,{get(){return S.d[S.side][k]},set(v){S.d[S.side][k]=v}}));
 const BACK={garment:[['Upper back',10,0,-3],['Center back',10,0,0],['Full back',12,0,1],['Neck tag 3"',3,0,-6.5]],sign:null,banner:null};
-function hasBack(){const u=PRODUCTS[S.p].unit;return u!=='tumbler';}
+function hasBack(){const u=PRODUCTS[S.p].unit;return u!=='tumbler'&&u!=='hat';}
 function sizesFor(){const P=PRODUCTS[S.p];return (S.side==='back'&&BACK[P.unit])?BACK[P.unit]:P.sizes;}
 const layer=document.createElement('canvas'),lctx=layer.getContext('2d');
 const tmp=document.createElement('canvas'),tctx=tmp.getContext('2d');
@@ -165,7 +180,7 @@ function processLogo(){
 
 // geometry helpers per product
 function geo(){
- const m=META[S.p];
+ const m=EM();
  if(m.quad){const q=m.quad,[RW,RH]=m.real;// affine sign inches -> canvas
   const a=(q[1][0]-q[0][0])/RW,b=(q[1][1]-q[0][1])/RW,c=(q[3][0]-q[0][0])/RH,d=(q[3][1]-q[0][1])/RH;
   return {type:'affine',T:[a,b,c,d,q[0][0],q[0][1]],cxIn:RW/2,cyIn:RH/2,ppi:Math.hypot(a,b)};}
@@ -173,9 +188,14 @@ function geo(){
   return {type:'affine',T:[k,0,0,k,x,y],cxIn:RW/2,cyIn:RH/2,ppi:k};}
  return {type:'flat',ppi:m.ppi,cx:m.area.cx,cy:(S.side==='back'&&m.backCy)?m.backCy:m.area.cy};
 }
+function drawCylP(m,g,wIn,hIn){const c=m.cyl,ppi=g.ppi,w=wIn*ppi,h=hIn*ppi,cx=c.cx+S.dx*ppi,cy=g.cy+S.dy*ppi,L=S.logo;
+ const R=c.rTop+(c.rBot-c.rTop)*Math.min(1,Math.max(0,(cy-c.yTop)/(c.yBot-c.yTop)));
+ for(let x=Math.floor(c.cx-R);x<=Math.ceil(c.cx+R);x++){const u=(x+0.5-c.cx)/R;if(Math.abs(u)>=1)continue;const sarc=Math.asin(u)*R;const lx=sarc-(cx-c.cx)+w/2;if(lx<0||lx>=w)continue;if(Math.sqrt(1-u*u)<0.2)continue;
+  const sx=lx/w*L.width;tctx.drawImage(L,sx,0,Math.max(1,Math.min(L.width/w/Math.max(Math.sqrt(1-u*u),0.25),L.width-sx)),L.height,x,cy-h/2,1.05,h);}}
 function logoSizeIn(){const L=S.logo;return [S.w,S.w*L.height/L.width];}
 
 function draw(){
+ if(isPhoto())return drawPhoto();
  const m=META[S.p],P=PRODUCTS[S.p];
  if(cv.width!==m.w||cv.height!==m.h){cv.width=m.w;cv.height=m.h;}
  [layer,tmp].forEach(c=>{c.width=m.w;c.height=m.h;});
@@ -207,6 +227,20 @@ function draw(){
  if(!window.__snap)drawGuides();
  summary();
 }
+function drawPhoto(){
+ const m=EM();if(cv.width!==m.w||cv.height!==m.h){cv.width=m.w;cv.height=m.h;}tmp.width=m.w;tmp.height=m.h;
+ const f=photoFor(),ph=getPhoto(f);ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;
+ ctx.fillStyle='#ffffff';ctx.fillRect(0,0,m.w,m.h);if(!ph.complete||!ph.naturalWidth){summary();return;}
+ ctx.drawImage(ph,0,0,m.w,m.h);
+ if(S.logo){const g=geo(),[wIn,hIn]=logoSizeIn();tctx.setTransform(1,0,0,1,0,0);tctx.globalCompositeOperation='source-over';tctx.clearRect(0,0,m.w,m.h);
+  if(m.cyl)drawCylP(m,g,wIn,hIn);else{const w=wIn*g.ppi,h=hIn*g.ppi;tctx.drawImage(S.logo,g.cx+S.dx*g.ppi-w/2,g.cy+S.dy*g.ppi-h/2,w,h);}
+  // shade logo with the photo's own light & folds
+  const pd=ctx.getImageData(0,0,m.w,m.h).data;
+  if(refCache[f]===undefined){const v=[];for(let y=m.area.cy-40;y<m.area.cy+40;y+=4)for(let x=m.area.cx-40;x<m.area.cx+40;x+=4){const i=(y*m.w+x)*4;v.push(pd[i]*.3+pd[i+1]*.59+pd[i+2]*.11);}v.sort((a,b)=>a-b);refCache[f]=Math.max(8,v[v.length>>1]);}
+  const ref=refCache[f];const L=tctx.getImageData(0,0,m.w,m.h),ld=L.data;
+  for(let i=0;i<ld.length;i+=4){if(!ld[i+3])continue;const lum=pd[i]*.3+pd[i+1]*.59+pd[i+2]*.11;const k=Math.min(1.12,Math.max(0.55,lum/ref));ld[i]=Math.min(255,ld[i]*k);ld[i+1]=Math.min(255,ld[i+1]*k);ld[i+2]=Math.min(255,ld[i+2]*k);ld[i+3]=ld[i+3]*0.96;}
+  tctx.putImageData(L,0,0);ctx.drawImage(tmp,0,0);}
+ if(!window.__snap)drawGuides();summary();}
 function drawCyl(m,g,wIn,hIn){
  const c=m.cyl,ppi=g.ppi,R=c.tw; // radius in px at top
  const w=wIn*ppi,h=hIn*ppi;const cx=c.cx+S.dx*ppi,cy=g.cy+S.dy*ppi;
@@ -262,11 +296,11 @@ function autoAlign(){const ys=snapTargetsY();let best=0;ys.forEach(y=>{if(Math.a
  S.dx=z?z[2]:0;S.dy=best;flashGuides();draw();}
 let guides=null,guideTimer=null;
 function flashGuides(){guides={v:true,h:true};clearTimeout(guideTimer);guideTimer=setTimeout(()=>{guides=null;draw();},900);}
-function drawGuides(){if(!guides||!S.logo)return;const g=geo(),m=META[S.p];ctx.save();ctx.setLineDash([8,6]);ctx.lineWidth=2;ctx.strokeStyle='#D64AFF';ctx.shadowColor='rgba(0,0,0,.35)';ctx.shadowBlur=3;
+function drawGuides(){if(!guides||!S.logo)return;const g=geo(),m=EM();ctx.save();ctx.setLineDash([8,6]);ctx.lineWidth=2;ctx.strokeStyle='#D64AFF';ctx.shadowColor='rgba(0,0,0,.35)';ctx.shadowBlur=3;
  const line=(a,b)=>{ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();};
  if(g.type==='affine'){const T=g.T,P=(x,y)=>[T[0]*x+T[2]*y+T[4],T[1]*x+T[3]*y+T[5]],[RW,RH]=m.real;
   if(guides.v)line(P(RW/2+S.dx,0),P(RW/2+S.dx,RH));if(guides.h)line(P(0,RH/2+S.dy),P(RW,RH/2+S.dy));}
- else{const x=(m.cyl?m.cyl.cx:g.cx)+S.dx*g.ppi,y=g.cy+S.dy*g.ppi,[w,h]=logoSizeIn();const ex=Math.max(w*g.ppi*0.8,120),ey=Math.max(h*g.ppi*0.9,120);
+ else{const x=g.cx+S.dx*g.ppi,y=g.cy+S.dy*g.ppi,[w,h]=logoSizeIn();const ex=Math.max(w*g.ppi*0.8,120),ey=Math.max(h*g.ppi*0.9,120);
   if(guides.v)line([x,y-ey],[x,y+ey]);if(guides.h)line([x-ex,y],[x+ex,y]);}
  ctx.restore();}
 document.getElementById('center').onclick=autoAlign;
@@ -311,7 +345,7 @@ document.getElementById('quote').onclick=()=>{download();const P=PRODUCTS[S.p],m
  const body=`Hi GSA,\n\nI'd like a quote for:\n\nProduct: ${m.label}${P.size?' ('+P.size+')':''}\nColor: ${S.colorName}\n${hasBack()?'Front design: '+sideLine('front')+'\nBack design: '+sideLine('back'):'Logo print size: '+sideLine('front')}\nQuantity: \nNeeded by: \n\nName: \nPhone: \n\n(I've attached my mockup and logo file.)`;
  location.href='mailto:Graphicsignsaccessories@outlook.com?subject='+encodeURIComponent('Mockup quote request – '+m.label+' – '+S.colorName)+'&body='+encodeURIComponent(body);};
 // init
-(async()=>{for(const k of ORDER){const m=META[k];imgs[k+'bg']=await load(ASSETS[m.bg]);imgs[k+'shade']=await load(ASSETS[m.shade]);if(m.over)imgs[k+'over']=await load(ASSETS[m.over]);if(m.backShade)imgs[k+'backshade']=await load(ASSETS[m.backShade]);}
+(async()=>{for(const k of ORDER){const m=META[k];if(!m.bg)continue;imgs[k+'bg']=await load(ASSETS[m.bg]);imgs[k+'shade']=await load(ASSETS[m.shade]);if(m.over)imgs[k+'over']=await load(ASSETS[m.over]);if(m.backShade)imgs[k+'backshade']=await load(ASSETS[m.backShade]);}
  imgs.sample=await load(ASSETS['sample-logo.png']);S.raw=imgs.sample;processLogo();
  const P=PRODUCTS[S.p];S.w=P.sizes[1][1];buildProducts();buildSides();buildSwatches();buildSizes();syncLogoUI();draw();})();
 </script>
