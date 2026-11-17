@@ -31,6 +31,35 @@ input,textarea{font:inherit}
 </style>
 
 <style>[hidden]{display:none!important} html{scroll-behavior:smooth} @media (max-width:640px){h1{font-size:3.1rem!important;line-height:1!important} h2{font-size:2.4rem!important}}</style>
+<style>
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.hc-btn{text-decoration:none;padding:16px 28px;border-radius:999px;font-weight:800;font-size:17px;min-height:52px;box-sizing:border-box;display:inline-flex;align-items:center;transition:transform .2s,filter .2s}
+.hc-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.hc-gold{background:#FFC72C;color:#16181D;box-shadow:0 0 32px rgba(255,199,44,0.45)}
+.hc-purple{color:#fff;background:linear-gradient(90deg,#6D4AFF,#D64AFF);box-shadow:0 0 28px rgba(214,74,255,0.45)}
+.hc-link{align-self:flex-start;color:#B9A8FF;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(185,168,255,0.4);padding-bottom:2px;margin-top:-10px}
+.hc-link:hover{color:#fff;border-color:#fff}
+.hc-btn:focus-visible,.hc-link:focus-visible,.pick:focus-visible,.trust a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.trust{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 22px;font-size:15px;font-weight:600;color:#E4E6EB}
+.trust li{display:flex;align-items:center;gap:8px}
+.trust li::before{content:"✓";display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#FFC72C;color:#16181D;font-size:12px;font-weight:900}
+.trust a{color:#FFC72C;font-weight:800;text-decoration:none}
+.picks-wrap{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:10px 24px 0}
+.picks-in{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;padding:18px 22px;border-radius:20px;background:rgba(20,16,46,0.65);border:1px solid rgba(185,168,255,0.25);backdrop-filter:blur(6px)}
+.picks-h{font-family:Anton,sans-serif;font-size:1.4rem;text-transform:uppercase;letter-spacing:1px;color:#fff}
+.picks{display:flex;flex-wrap:wrap;gap:10px}
+.pick{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;font-weight:800;font-size:15px;text-decoration:none;color:#fff;background:linear-gradient(#141130,#141130) padding-box,linear-gradient(120deg,var(--c1),var(--c2)) border-box;border:2px solid transparent;transition:transform .2s,box-shadow .2s,background .2s}
+.pick:hover{transform:translateY(-2px);color:#14121f;background:linear-gradient(120deg,var(--c1),var(--c2)) padding-box,linear-gradient(120deg,var(--c1),var(--c2)) border-box;box-shadow:0 8px 24px -8px var(--c1)}
+.horizon{--R:1300px;position:relative;height:250px;overflow:hidden;margin-top:-40px}
+.planet{position:absolute;left:50%;top:150px;width:calc(var(--R)*2);height:calc(var(--R)*2);margin-left:calc(var(--R)*-1);border-radius:50%;background:radial-gradient(circle at 50% 0%,#1A1440,#0B0C1C 8%);border-top:2px solid rgba(185,168,255,0.75);box-shadow:0 -20px 60px rgba(109,74,255,0.55),inset 0 20px 60px rgba(109,74,255,0.25)}
+.orb-ring{position:absolute;left:50%;top:calc(150px + var(--R));width:0;height:0;animation:orbit 300s linear infinite}@keyframes orbit{to{transform:rotate(360deg)}}
+.orb-item{position:absolute;left:0;top:0;transform:rotate(var(--a)) translateY(calc(var(--R)*-1 - 62px))}
+.orb-item>span{display:block;width:78px;height:78px;margin:-39px 0 0 -39px;border-radius:50%;padding:3px;background:linear-gradient(140deg,#FFC72C,#8B5CFF,#38D6FF);box-shadow:0 0 22px rgba(139,92,255,0.6)}
+.orb-item img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
+@media (max-width:520px){#top>div:last-child>div{zoom:.82}}
+@media (max-width:700px){.horizon{--R:620px;height:210px}.orb-item>span{width:64px;height:64px;margin:-32px 0 0 -32px}.picks-h{width:100%}}
+@media (prefers-reduced-motion:reduce){.orb-ring{animation:none}.hc-btn,.pick{transition:none}}
+</style>
 </head>
 <body>
 
@@ -57,16 +86,22 @@ input,textarea{font:inherit}
 </div>
 </header>
 
-<section id="top" style="position: relative; max-width: 1200px; margin: 0 auto; padding: 110px 24px 140px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<section id="top" style="position: relative; max-width: 1200px; margin: 0 auto; padding: 110px 24px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
 <div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
 <div style="font-size: 14px; font-weight: 700; letter-spacing: 4px; color: #FFC72C; text-transform: uppercase">Signs · Wraps · Custom accessories</div>
 <h1 style="margin: 0; font-family: Anton, sans-serif; font-weight: 400; font-size: 5.5rem; line-height: 0.95; text-transform: uppercase">Signs that get you noticed. <span style="color: #B9A8FF">From across the galaxy.</span></h1>
 <p style="margin: 0; font-size: 1.25rem; line-height: 1.6; color: #C9CDD4; max-width: 560px">Storefront signs, banners, vehicle graphics and custom branded gear for local businesses — designed, printed and installed or shipped by one shop.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 14px">
-<a href="#quote" style="background: #FFC72C; color: #16181D; text-decoration: none; padding: 16px 28px; border-radius: 999px; font-weight: 800; font-size: 17px; box-shadow: 0 0 32px rgba(255,199,44,0.45)">Launch your project</a>
-<a href="#services" style="border: 1px solid rgba(185,168,255,0.6); color: #ffffff; text-decoration: none; padding: 15px 27px; border-radius: 999px; font-weight: 700; font-size: 17px; background: rgba(109,74,255,0.12)">Explore what we make</a>
-<a href="mockup.html" style="color: #ffffff; text-decoration: none; padding: 15px 27px; border-radius: 999px; font-weight: 800; font-size: 17px; background: linear-gradient(90deg,#6D4AFF,#D64AFF); box-shadow: 0 0 28px rgba(214,74,255,0.45)">Design your own ✦</a>
+<div class="hero-cta">
+<a href="#quote" class="hc-btn hc-gold">Get a free quote</a>
+<a href="mockup.html" class="hc-btn hc-purple">Design your own ✦</a>
 </div>
+<a href="#services" class="hc-link">Explore what we make <span aria-hidden="true">↓</span></a>
+<ul class="trust" aria-label="Why Graphic Signs &amp; Accessories">
+<li>Free quotes</li>
+<li>Local to Chesterfield, MO</li>
+<li>Installed locally · Shipped nationwide</li>
+<li>Call/text <a href="tel:+13528162574">352-816-2574</a></li>
+</ul>
 </div>
 <div style="flex: 1 1 400px; min-width: 0; display: flex; justify-content: center">
 <div style="position: relative; width: 480px; max-width: 100%; height: 470px">
@@ -82,13 +117,19 @@ input,textarea{font:inherit}
 <div class="bob" style="position: absolute; left: 53px; top: 327px; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px; background: rgba(20,16,46,0.9); border: 1px solid rgba(255,199,44,0.6); border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 800; white-space: nowrap">Signs</div>
 <div class="bob" style="position: absolute; left: 262px; top: 299px; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px; background: rgba(20,16,46,0.9); border: 1px solid rgba(31,182,255,0.7); border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 800; white-space: nowrap; animation-delay: -2s">Wraps</div>
 <div class="bob" style="position: absolute; left: 400px; top: 236px; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px; background: rgba(20,16,46,0.9); border: 1px solid rgba(185,168,255,0.7); border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 800; white-space: nowrap; animation-delay: -4s">Gear</div>
-<div style="position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); font-size: 13px; font-weight: 700; letter-spacing: 3px; color: #B9A8FF; white-space: nowrap; text-transform: uppercase">Installed locally · Shipped nationwide</div>
 </div>
 </div>
 </section>
 
-<div aria-hidden="true" style="position: relative; height: 140px; overflow: hidden">
-<div style="position: absolute; left: -20%; right: -20%; top: 40px; height: 1200px; border-radius: 50%; background: radial-gradient(ellipse at top, #1A1440, #0B0C1C 40%); border-top: 2px solid rgba(185,168,255,0.7); box-shadow: 0 -20px 60px rgba(109,74,255,0.5)"></div>
+<div class="picks-wrap">
+<div class="picks-in">
+<div class="picks-h">What do you need?</div>
+<div class="picks"><a class="pick" style="--c1:#FFC72C;--c2:#FF7A1A" href="mockup.html?p=yard"><span aria-hidden="true">🪧</span>Yard signs</a><a class="pick" style="--c1:#FF7A1A;--c2:#FF4D6D" href="mockup.html?p=banner"><span aria-hidden="true">🎉</span>Banners</a><a class="pick" style="--c1:#38D6FF;--c2:#3B6BFF" href="#quote" data-service="Vehicle graphics"><span aria-hidden="true">🚐</span>Magnetic signs</a><a class="pick" style="--c1:#3BE3A7;--c2:#16A3FF" href="mockup.html?p=tee"><span aria-hidden="true">👕</span>T-shirts</a><a class="pick" style="--c1:#8B5CFF;--c2:#3B6BFF" href="mockup.html?p=hoodie"><span aria-hidden="true">🧥</span>Hoodies</a><a class="pick" style="--c1:#38D6FF;--c2:#8B5CFF" href="mockup.html?p=tumbler"><span aria-hidden="true">🥤</span>Tumblers</a><a class="pick" style="--c1:#FF5FA2;--c2:#8B5CFF" href="mockup.html?p=hat"><span aria-hidden="true">🧢</span>Hats</a><a class="pick" style="--c1:#FFC72C;--c2:#FF5FA2" href="mockup.html?p=beanie"><span aria-hidden="true">🧶</span>Beanies</a></div>
+</div>
+</div>
+<div aria-hidden="true" class="horizon">
+<div class="orb-ring"><div class="orb-item" style="--a:0.00deg"><span><img src="img/orbit-tees.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:15.00deg"><span><img src="img/orbit-yard.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:30.00deg"><span><img src="img/orbit-van.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:45.00deg"><span><img src="img/orbit-tumblers.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:60.00deg"><span><img src="img/orbit-banner.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:75.00deg"><span><img src="img/orbit-hoodies.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:90.00deg"><span><img src="img/orbit-galaxy.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:105.00deg"><span><img src="img/orbit-store.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:120.00deg"><span><img src="img/orbit-tees.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:135.00deg"><span><img src="img/orbit-yard.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:150.00deg"><span><img src="img/orbit-van.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:165.00deg"><span><img src="img/orbit-tumblers.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:180.00deg"><span><img src="img/orbit-banner.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:195.00deg"><span><img src="img/orbit-hoodies.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:210.00deg"><span><img src="img/orbit-galaxy.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:225.00deg"><span><img src="img/orbit-store.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:240.00deg"><span><img src="img/orbit-tees.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:255.00deg"><span><img src="img/orbit-yard.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:270.00deg"><span><img src="img/orbit-van.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:285.00deg"><span><img src="img/orbit-tumblers.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:300.00deg"><span><img src="img/orbit-banner.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:315.00deg"><span><img src="img/orbit-hoodies.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:330.00deg"><span><img src="img/orbit-galaxy.webp" alt="" width="200" height="200" loading="lazy"></span></div><div class="orb-item" style="--a:345.00deg"><span><img src="img/orbit-store.webp" alt="" width="200" height="200" loading="lazy"></span></div></div>
+<div class="planet"></div>
 </div>
 
 <section id="services" style="position: relative; background: #0B0C1C">
@@ -98,54 +139,54 @@ input,textarea{font:inherit}
 <h2 style="margin: 0; font-family: Anton, sans-serif; font-weight: 400; font-size: 3.5rem; line-height: 1; text-transform: uppercase">Three ways to put your name in orbit</h2>
 </div>
 <style>
-.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
-.svc{--c1:#fff;--c2:#fff;--g:255,255,255;position:relative;border-radius:22px;padding:1.5px;background:linear-gradient(140deg,var(--c1),var(--c2) 45%,rgba(255,255,255,0.08) 80%);box-shadow:0 18px 50px -18px rgba(var(--g),0.55);transition:transform .25s ease,box-shadow .25s ease}
-.svc:hover{transform:translateY(-6px);box-shadow:0 26px 70px -16px rgba(var(--g),0.8)}
-.svc-in{height:100%;border-radius:21px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(120% 70% at 100% 0%,rgba(var(--g),0.22),transparent 60%),linear-gradient(180deg,#17142f,#0f0e22)}
-.svc-pic{position:relative;height:150px;overflow:hidden}
-.svc-pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
-.svc:hover .svc-pic img{transform:scale(1.06)}
-.svc-pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,14,34,0) 25%,#151230 100%),linear-gradient(120deg,rgba(var(--g),0.35),transparent 60%)}
-.svc-tag{position:absolute;top:14px;left:14px;z-index:1;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#14121f;background:linear-gradient(90deg,var(--c1),var(--c2));padding:6px 12px;border-radius:999px}
-.svc-body{padding:0 32px 32px;margin-top:-30px;position:relative;z-index:1;display:flex;flex-direction:column;gap:16px;flex:1}
-.svc-ico{width:62px;height:62px;border-radius:18px;background:linear-gradient(140deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -6px rgba(var(--g),0.8),inset 0 1px 0 rgba(255,255,255,0.4)}
-.svc h3{margin:0;font-size:1.65rem;font-weight:800;background:linear-gradient(90deg,#fff 40%,var(--c1));-webkit-background-clip:text;background-clip:text;color:transparent}
-.svc p{margin:0;font-size:1rem;line-height:1.6;color:#C9CDD4}
-.svc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:1rem;line-height:1.5;color:#E9EAF0}
-.svc li{display:flex;gap:10px;align-items:flex-start}
-.svc li::before{content:"";flex:none;width:20px;height:20px;margin-top:2px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-6.5' fill='none' stroke='%2314121f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat,linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 0 12px rgba(var(--g),0.55)}
-.svc-cta{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:800;font-size:.95rem;text-decoration:none;color:#14121f;background:linear-gradient(90deg,var(--c1),var(--c2));box-shadow:0 8px 22px -8px rgba(var(--g),0.9);transition:filter .2s}
-.svc-cta:hover{filter:brightness(1.1)}
-.svc-cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
-@media (prefers-reduced-motion:reduce){.svc,.svc-pic img{transition:none}.svc:hover{transform:none}}
+.scard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+.scard{--c1:#fff;--c2:#fff;--g:255,255,255;position:relative;border-radius:22px;padding:1.5px;background:linear-gradient(140deg,var(--c1),var(--c2) 45%,rgba(255,255,255,0.08) 80%);box-shadow:0 18px 50px -18px rgba(var(--g),0.55);transition:transform .25s ease,box-shadow .25s ease}
+.scard:hover{transform:translateY(-6px);box-shadow:0 26px 70px -16px rgba(var(--g),0.8)}
+.scard-in{height:100%;border-radius:21px;overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(120% 70% at 100% 0%,rgba(var(--g),0.22),transparent 60%),linear-gradient(180deg,#17142f,#0f0e22)}
+.scard-pic{position:relative;height:150px;overflow:hidden}
+.scard-pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.scard:hover .scard-pic img{transform:scale(1.06)}
+.scard-pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,14,34,0) 25%,#151230 100%),linear-gradient(120deg,rgba(var(--g),0.35),transparent 60%)}
+.scard-tag{position:absolute;top:14px;left:14px;z-index:1;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#14121f;background:linear-gradient(90deg,var(--c1),var(--c2));padding:6px 12px;border-radius:999px}
+.scard-body{padding:0 32px 32px;margin-top:-30px;position:relative;z-index:1;display:flex;flex-direction:column;gap:16px;flex:1}
+.scard-ico{width:62px;height:62px;border-radius:18px;background:linear-gradient(140deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -6px rgba(var(--g),0.8),inset 0 1px 0 rgba(255,255,255,0.4)}
+.scard h3{margin:0;font-size:1.65rem;font-weight:800;background:linear-gradient(90deg,#fff 40%,var(--c1));-webkit-background-clip:text;background-clip:text;color:transparent}
+.scard p{margin:0;font-size:1rem;line-height:1.6;color:#C9CDD4}
+.scard ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:1rem;line-height:1.5;color:#E9EAF0}
+.scard li{display:flex;gap:10px;align-items:flex-start}
+.scard li::before{content:"";flex:none;width:20px;height:20px;margin-top:2px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-6.5' fill='none' stroke='%2314121f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat,linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 0 12px rgba(var(--g),0.55)}
+.scard-cta{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:800;font-size:.95rem;text-decoration:none;color:#14121f;background:linear-gradient(90deg,var(--c1),var(--c2));box-shadow:0 8px 22px -8px rgba(var(--g),0.9);transition:filter .2s}
+.scard-cta:hover{filter:brightness(1.1)}
+.scard-cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.scard,.scard-pic img{transition:none}.scard:hover{transform:none}}
 </style>
-<div class="svc-grid">
-<article class="svc" style="--c1:#FFC72C;--c2:#FF7A1A;--g:255,170,40"><div class="svc-in">
-<div class="svc-pic"><span class="svc-tag">Signs</span><img src="img/storefront.webp" alt="Gold storefront sign letters" loading="lazy" width="600" height="300"></div>
-<div class="svc-body">
-<div class="svc-ico"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14121f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="10" rx="1.5"/><path d="M8 14v6M16 14v6"/></svg></div>
+<div class="scard-grid">
+<article class="scard" style="--c1:#FFC72C;--c2:#FF7A1A;--g:255,170,40"><div class="scard-in">
+<div class="scard-pic"><span class="scard-tag">Signs</span><img src="img/storefront.webp" alt="Gold storefront sign letters" loading="lazy" width="600" height="300"></div>
+<div class="scard-body">
+<div class="scard-ico"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14121f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="10" rx="1.5"/><path d="M8 14v6M16 14v6"/></svg></div>
 <h3>Business signage</h3>
 <p>Everything that tells customers where you are and that you're open.</p>
 <ul><li>Storefront &amp; building signs</li><li>Banners and event signs</li><li>Yard signs and A-frames</li><li>Window graphics &amp; wall decals</li></ul>
-<a class="svc-cta" href="#quote">Get a sign quote →</a>
+<a class="scard-cta" href="#quote" data-service="Business signage">Get a sign quote →</a>
 </div></div></article>
-<article class="svc" style="--c1:#38D6FF;--c2:#3B6BFF;--g:60,170,255"><div class="svc-in">
-<div class="svc-pic"><span class="svc-tag">Vehicles</span><img src="img/van.webp" alt="Lettered work van" loading="lazy" width="600" height="300"></div>
-<div class="svc-body">
-<div class="svc-ico"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14121f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16V8a1 1 0 0 1 1-1h11v9"/><path d="M14 10h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></div>
+<article class="scard" style="--c1:#38D6FF;--c2:#3B6BFF;--g:60,170,255"><div class="scard-in">
+<div class="scard-pic"><span class="scard-tag">Vehicles</span><img src="img/van.webp" alt="Lettered work van" loading="lazy" width="600" height="300"></div>
+<div class="scard-body">
+<div class="scard-ico"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14121f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16V8a1 1 0 0 1 1-1h11v9"/><path d="M14 10h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></div>
 <h3>Vehicle graphics</h3>
 <p>Turn every truck, van and trailer into a billboard that drives itself.</p>
 <ul><li>Full and partial wraps</li><li>Door logos &amp; fleet lettering</li><li>Magnetic door signs</li><li>DOT numbers</li><li>Trailer and food-truck graphics</li></ul>
-<a class="svc-cta" href="#quote">Get a vehicle quote →</a>
+<a class="scard-cta" href="#quote" data-service="Vehicle graphics">Get a vehicle quote →</a>
 </div></div></article>
-<article class="svc" style="--c1:#FF5FA2;--c2:#8B5CFF;--g:220,90,255"><div class="svc-in">
-<div class="svc-pic"><span class="svc-tag">Gear</span><img src="img/galaxy-tees-black.webp" alt="Galaxy logo tees" loading="lazy" width="600" height="300"></div>
-<div class="svc-body">
-<div class="svc-ico"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14121f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 6l2 4 2-1v12h8V9l2 1 2-4-4-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3Z"/></svg></div>
+<article class="scard" style="--c1:#FF5FA2;--c2:#8B5CFF;--g:220,90,255"><div class="scard-in">
+<div class="scard-pic"><span class="scard-tag">Gear</span><img src="img/galaxy-tees-black.webp" alt="Galaxy logo tees" loading="lazy" width="600" height="300"></div>
+<div class="scard-body">
+<div class="scard-ico"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14121f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 6l2 4 2-1v12h8V9l2 1 2-4-4-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3Z"/></svg></div>
 <h3>Custom accessories</h3>
 <p>Branded gear for your crew, your customers and your events.</p>
 <ul><li>Custom cups &amp; tumblers</li><li>T-shirts &amp; hoodies</li><li>Hats &amp; beanies</li><li>Stickers and die-cut decals</li><li>Magnets and promo items</li></ul>
-<a class="svc-cta" href="mockup.html">Design yours ✦</a>
+<a class="scard-cta" href="mockup.html">Design yours ✦</a>
 </div></div></article>
 </div>
 </div>
@@ -298,6 +339,9 @@ f.addEventListener('submit',function(e){e.preventDefault();var d=new FormData(f)
  f.hidden=true;t.hidden=false;});
 document.getElementById('again').addEventListener('click',function(){f.reset();t.hidden=true;f.hidden=false;});
 })();
+</script>
+<script>
+document.querySelectorAll('a[data-service]').forEach(function(a){a.addEventListener('click',function(){var b=document.querySelector('button.svc[data-label="'+a.dataset.service+'"]');if(b)b.click();var d=document.querySelector('#quoteForm textarea');if(d&&a.textContent.indexOf('Magnetic')>=0&&!d.value)d.value='Magnetic signs for my vehicle — size and quantity: ';});});
 </script>
 </body>
 </html>

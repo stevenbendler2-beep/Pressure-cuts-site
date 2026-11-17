@@ -4839,6 +4839,7 @@ document.getElementById('m3dReset').onclick=()=>GSA3D.reset();
 document.getElementById('m3dSave').onclick=()=>{const u=GSA3D.snapshot();if(!u)return;const a=document.createElement('a');a.download=`GSA-3D-${META[S.p].label.toLowerCase().replace(/\s+/g,'-')}.png`;a.href=u;document.body.appendChild(a);a.click();a.remove();};
 window.addEventListener('resize',()=>{if(!document.getElementById('m3d').hidden)GSA3D.resize();});
 document.getElementById('products').addEventListener('click',()=>setTimeout(sync3DBtn,0));sync3DBtn();
+window.addEventListener('load',()=>setTimeout(()=>{try{const k=new URLSearchParams(location.search).get('p');if(k&&PRODUCTS[k]&&META[k]){const b=[...document.querySelectorAll('#products button')].find(x=>x.textContent.trim()===META[k].label);if(b)b.click();}}catch(e){}},400));
 </script>
 </body>
 </html>
