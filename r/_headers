@@ -1,0 +1,6 @@
+/img/*
+  Cache-Control: public, max-age=604800
+/src-photos/*
+  Cache-Control: public, max-age=604800
+/gsa3d.js
+  Cache-Control: public, max-age=604800
