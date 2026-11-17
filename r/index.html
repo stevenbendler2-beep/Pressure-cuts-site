@@ -69,6 +69,42 @@ input,textarea{font:inherit}
 .trust a{display:inline-flex;align-items:center;min-height:44px}
 .hc-link{display:inline-flex;align-items:center;min-height:44px;margin-top:-14px}
 </style>
+<style>
+.gx-wrap{display:flex;flex-direction:column;gap:20px}
+.gx-row{display:grid;gap:20px}
+.gx-r2{grid-template-columns:1fr 1fr}.gx-r3{grid-template-columns:repeat(3,1fr)}
+.gx{position:relative;margin:0;border-radius:20px;overflow:hidden;border:1px solid rgba(185,168,255,0.3);background:#120f2b;box-shadow:0 14px 40px -18px rgba(109,74,255,0.6);transition:transform .25s,box-shadow .25s}
+.gx:hover{transform:translateY(-4px);box-shadow:0 22px 60px -16px rgba(109,74,255,0.85)}
+.gx-open{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;position:relative}
+.gx-open img{display:block;width:100%;height:auto;aspect-ratio:800/520;object-fit:cover;transition:transform .5s}
+.gx:hover .gx-open img{transform:scale(1.04)}
+.gx-zoom{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(10,8,30,0.7);color:#fff;font-size:18px;opacity:0;transition:opacity .2s}
+.gx:hover .gx-zoom,.gx-open:focus-visible .gx-zoom{opacity:1}
+.gx figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:14px 18px 16px}
+.gx figcaption b{font-size:16px;font-weight:800}
+.gx figcaption>span:not(.gx-tag){flex-basis:100%;font-size:14px;color:#A3A8B3;line-height:1.45}
+.gx-tag{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#14121f;background:linear-gradient(90deg,#FFC72C,#FF7A1A);padding:4px 9px;border-radius:999px}
+.gx[data-tag=Vehicles] .gx-tag,.gx-box[data-tag=Vehicles] .gx-tag{background:linear-gradient(90deg,#38D6FF,#3B6BFF)}
+.gx[data-tag=Apparel] .gx-tag,.gx-box[data-tag=Apparel] .gx-tag{background:linear-gradient(90deg,#FF5FA2,#8B5CFF);color:#fff}
+.gx[data-tag=Drinkware] .gx-tag,.gx-box[data-tag=Drinkware] .gx-tag{background:linear-gradient(90deg,#3BE3A7,#16A3FF)}
+.gx-cta{display:inline-flex;align-items:center;min-height:40px;margin-top:6px;padding:0 16px;border-radius:999px;font-weight:800;font-size:14px;text-decoration:none;color:#14121f;background:#FFC72C;box-shadow:0 6px 18px -6px rgba(255,199,44,0.8)}
+.gx-cta:hover{filter:brightness(1.08)}
+.gx-r2 .gx figcaption b{font-size:19px}
+.gx-open:focus-visible,.gx-cta:focus-visible,.gx-box button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.gx-box{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);width:100%;color:#fff}
+.gx-box::backdrop{background:rgba(5,4,20,0.85);backdrop-filter:blur(4px)}
+.gx-box-in{position:relative;border-radius:20px;overflow:hidden;background:#141130;border:1px solid rgba(185,168,255,0.35)}
+.gx-box img{display:block;width:100%;max-height:72vh;object-fit:contain;background:#0b0a1c}
+.gx-info{padding:18px 22px 22px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.gx-info h3{margin:0;font-size:1.5rem;font-weight:800}.gx-info p{margin:0;color:#C9CDD4}
+.gx-nav{display:flex;gap:10px;align-items:center;margin-top:6px;flex-wrap:wrap}
+.gx-nav button,.gx-x{width:44px;height:44px;border-radius:50%;border:1px solid rgba(185,168,255,0.5);background:rgba(20,16,46,0.85);color:#fff;font-size:18px;cursor:pointer}
+.gx-x{position:absolute;top:12px;right:12px;z-index:1}
+.gx-cta.big{margin:0;min-height:44px;font-size:15px}
+@media (max-width:900px){.gx-r3{grid-template-columns:1fr 1fr}.gx-r3 .gx:last-child:nth-child(odd){grid-column:1/-1}}
+@media (max-width:600px){.gx-r2,.gx-r3{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.gx,.gx-open img{transition:none}.gx:hover{transform:none}.gx:hover .gx-open img{transform:none}}
+</style>
 </head>
 <body>
 
@@ -228,39 +264,54 @@ input,textarea{font:inherit}
 </div>
 <span style="display:flex;gap:18px;flex-wrap:wrap"><a href="mockup.html" style="font-weight: 800; font-size: 16px">Try it on your logo ✦</a><a href="#quote" style="font-weight: 800; font-size: 16px">Start yours →</a></span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
-<figure style="margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(185,168,255,0.3); background: rgba(20,16,46,0.7); display: flex; flex-direction: column">
-<img loading="lazy" decoding="async" width="800" height="520" src="img/storefront.webp" alt="Black storefront sign band with gold dimensional RIVERSIDE COFFEE lettering on a brick building" style="display: block; width: 100%; aspect-ratio: 800 / 520; object-fit: cover">
-<figcaption style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 800; font-size: 15px">Storefront sign</span><span style="font-size: 13px; color: #A3A8B3">Gold dimensional letters on a storefront sign band</span></figcaption>
+<div class="gx-wrap">
+<div class="gx-row gx-r2">
+<figure class="gx" data-i="0" data-href="#quote" data-service="Business signage" data-cta="Get a sign quote" data-tag="Signs">
+<button type="button" class="gx-open" aria-label="View larger: Storefront sign"><img loading="lazy" decoding="async" width="800" height="520" src="img/storefront.webp" alt="Black storefront sign band with gold dimensional RIVERSIDE COFFEE lettering on a brick building"><span class="gx-zoom" aria-hidden="true">⤢</span></button>
+<figcaption><span class="gx-tag">Signs</span><b>Storefront sign</b><span>Gold dimensional letters on a storefront sign band</span><a class="gx-cta" href="#quote" data-service="Business signage">Get a sign quote</a></figcaption>
 </figure>
-<figure style="margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(185,168,255,0.3); background: rgba(20,16,46,0.7); display: flex; flex-direction: column">
-<img loading="lazy" decoding="async" width="800" height="520" src="img/van.webp" alt="White cargo van with APEX HVAC door graphics, services, phone number and blue and orange stripes" style="display: block; width: 100%; aspect-ratio: 800 / 520; object-fit: cover">
-<figcaption style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 800; font-size: 15px">Vehicle graphics</span><span style="font-size: 13px; color: #A3A8B3">Door and side graphics for an HVAC service van</span></figcaption>
+<figure class="gx" data-i="1" data-href="#quote" data-service="Vehicle graphics" data-cta="Get a vehicle quote" data-tag="Vehicles">
+<button type="button" class="gx-open" aria-label="View larger: Vehicle graphics"><img loading="lazy" decoding="async" width="800" height="520" src="img/van.webp" alt="White cargo van with APEX HVAC door graphics, services, phone number and blue and orange stripes"><span class="gx-zoom" aria-hidden="true">⤢</span></button>
+<figcaption><span class="gx-tag">Vehicles</span><b>Vehicle graphics</b><span>Door and side graphics for an HVAC service van</span><a class="gx-cta" href="#quote" data-service="Vehicle graphics">Get a vehicle quote</a></figcaption>
 </figure>
-<figure style="margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(185,168,255,0.3); background: rgba(20,16,46,0.7); display: flex; flex-direction: column">
-<img loading="lazy" decoding="async" width="800" height="520" src="img/banner.webp" alt="Galaxy grand-opening vinyl banner zip-tied to a chain-link fence" style="display: block; width: 100%; aspect-ratio: 800 / 520; object-fit: cover">
-<figcaption style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 800; font-size: 15px">Banners</span><span style="font-size: 13px; color: #A3A8B3">2×6 ft grand-opening vinyl banner with grommets</span></figcaption>
+</div>
+<div class="gx-row gx-r3">
+<figure class="gx" data-i="2" data-href="mockup.html?p=banner" data-cta="Design a banner ✦" data-tag="Signs">
+<button type="button" class="gx-open" aria-label="View larger: Banners"><img loading="lazy" decoding="async" width="800" height="520" src="img/banner.webp" alt="Galaxy grand-opening vinyl banner zip-tied to a chain-link fence"><span class="gx-zoom" aria-hidden="true">⤢</span></button>
+<figcaption><span class="gx-tag">Signs</span><b>Banners</b><span>2×6 ft grand-opening vinyl banner with grommets</span><a class="gx-cta" href="mockup.html?p=banner">Design a banner ✦</a></figcaption>
 </figure>
-<figure style="margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(185,168,255,0.3); background: rgba(20,16,46,0.7); display: flex; flex-direction: column">
-<img loading="lazy" decoding="async" width="800" height="520" src="img/yard.webp" alt="Galaxy-print graduation yard sign on a wire H-stake in a front lawn" style="display: block; width: 100%; aspect-ratio: 800 / 520; object-fit: cover">
-<figcaption style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 800; font-size: 15px">Yard signs</span><span style="font-size: 13px; color: #A3A8B3">Corrugated grad, event and real-estate signs with H-stakes</span></figcaption>
+<figure class="gx" data-i="3" data-href="mockup.html?p=yard" data-cta="Design a yard sign ✦" data-tag="Signs">
+<button type="button" class="gx-open" aria-label="View larger: Yard signs"><img loading="lazy" decoding="async" width="800" height="520" src="img/yard.webp" alt="Galaxy-print graduation yard sign on a wire H-stake in a front lawn"><span class="gx-zoom" aria-hidden="true">⤢</span></button>
+<figcaption><span class="gx-tag">Signs</span><b>Yard signs</b><span>Corrugated grad, event and real-estate signs with H-stakes</span><a class="gx-cta" href="mockup.html?p=yard">Design a yard sign ✦</a></figcaption>
 </figure>
-<figure style="margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(185,168,255,0.3); background: rgba(20,16,46,0.7); display: flex; flex-direction: column">
-<img loading="lazy" decoding="async" width="800" height="520" src="img/tees2.webp" alt="Royal blue, black and white Gildan T-shirts printed with the galaxy GSA logo" style="display: block; width: 100%; aspect-ratio: 800 / 520; object-fit: cover">
-<figcaption style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 800; font-size: 15px">T-shirts</span><span style="font-size: 13px; color: #A3A8B3">Any color tee or long sleeve, printed with your logo</span></figcaption>
+<figure class="gx" data-i="4" data-href="mockup.html?p=tumbler" data-cta="Design a tumbler ✦" data-tag="Drinkware">
+<button type="button" class="gx-open" aria-label="View larger: Cups & tumblers"><img loading="lazy" decoding="async" width="800" height="520" src="img/tumblers.webp" alt="White tumbler with a clear lid printed with the galaxy GSA logo"><span class="gx-zoom" aria-hidden="true">⤢</span></button>
+<figcaption><span class="gx-tag">Drinkware</span><b>Cups & tumblers</b><span>Custom vinyl tumblers with names, logos and full designs</span><a class="gx-cta" href="mockup.html?p=tumbler">Design a tumbler ✦</a></figcaption>
 </figure>
-<figure style="margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(185,168,255,0.3); background: rgba(20,16,46,0.7); display: flex; flex-direction: column">
-<img loading="lazy" decoding="async" width="800" height="520" src="img/galaxy2.webp" alt="Black T-shirt and black hoodie printed with the galaxy GSA logo on a starry background" style="display: block; width: 100%; aspect-ratio: 800 / 520; object-fit: cover">
-<figcaption style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 800; font-size: 15px">Galaxy prints on black</span><span style="font-size: 13px; color: #A3A8B3">Bold cosmic designs that pop on dark shirts</span></figcaption>
+</div>
+<div class="gx-row gx-r3">
+<figure class="gx" data-i="5" data-href="mockup.html?p=tee" data-cta="Design a T-shirt ✦" data-tag="Apparel">
+<button type="button" class="gx-open" aria-label="View larger: T-shirts"><img loading="lazy" decoding="async" width="800" height="520" src="img/tees2.webp" alt="Royal blue, black and white Gildan T-shirts printed with the galaxy GSA logo"><span class="gx-zoom" aria-hidden="true">⤢</span></button>
+<figcaption><span class="gx-tag">Apparel</span><b>T-shirts</b><span>Any color tee or long sleeve, printed with your logo</span><a class="gx-cta" href="mockup.html?p=tee">Design a T-shirt ✦</a></figcaption>
 </figure>
-<figure style="margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(185,168,255,0.3); background: rgba(20,16,46,0.7); display: flex; flex-direction: column">
-<img loading="lazy" decoding="async" width="800" height="520" src="img/hoodies2.webp" alt="Grey, navy and maroon Gildan hoodies printed with the galaxy GSA logo" style="display: block; width: 100%; aspect-ratio: 800 / 520; object-fit: cover">
-<figcaption style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 800; font-size: 15px">Hoodies</span><span style="font-size: 13px; color: #A3A8B3">Pullover hoodies in your colors for teams, crews and schools</span></figcaption>
+<figure class="gx" data-i="6" data-href="mockup.html?p=hoodie" data-cta="Design one like this ✦" data-tag="Apparel">
+<button type="button" class="gx-open" aria-label="View larger: Galaxy prints on black"><img loading="lazy" decoding="async" width="800" height="520" src="img/galaxy2.webp" alt="Black T-shirt and black hoodie printed with the galaxy GSA logo on a starry background"><span class="gx-zoom" aria-hidden="true">⤢</span></button>
+<figcaption><span class="gx-tag">Apparel</span><b>Galaxy prints on black</b><span>Bold cosmic designs that pop on dark shirts</span><a class="gx-cta" href="mockup.html?p=hoodie">Design one like this ✦</a></figcaption>
 </figure>
-<figure style="margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid rgba(185,168,255,0.3); background: rgba(20,16,46,0.7); display: flex; flex-direction: column">
-<img loading="lazy" decoding="async" width="800" height="520" src="img/tumblers.webp" alt="White tumbler with a clear lid printed with the galaxy GSA logo" style="display: block; width: 100%; aspect-ratio: 800 / 520; object-fit: cover">
-<figcaption style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 800; font-size: 15px">Cups & tumblers</span><span style="font-size: 13px; color: #A3A8B3">Custom vinyl tumblers with names, logos and full designs</span></figcaption>
+<figure class="gx" data-i="7" data-href="mockup.html?p=hoodie" data-cta="Design a hoodie ✦" data-tag="Apparel">
+<button type="button" class="gx-open" aria-label="View larger: Hoodies"><img loading="lazy" decoding="async" width="800" height="520" src="img/hoodies2.webp" alt="Grey, navy and maroon Gildan hoodies printed with the galaxy GSA logo"><span class="gx-zoom" aria-hidden="true">⤢</span></button>
+<figcaption><span class="gx-tag">Apparel</span><b>Hoodies</b><span>Pullover hoodies in your colors for teams, crews and schools</span><a class="gx-cta" href="mockup.html?p=hoodie">Design a hoodie ✦</a></figcaption>
 </figure>
+</div>
+</div>
+<dialog class="gx-box" id="gxBox" aria-labelledby="gxTitle">
+<div class="gx-box-in">
+<button type="button" class="gx-x" id="gxClose" aria-label="Close">✕</button>
+<img id="gxImg" alt="">
+<div class="gx-info"><span class="gx-tag" id="gxTag"></span><h3 id="gxTitle"></h3><p id="gxDesc"></p>
+<div class="gx-nav"><button type="button" id="gxPrev" aria-label="Previous photo">←</button><a class="gx-cta big" id="gxCta" href="#"></a><button type="button" id="gxNext" aria-label="Next photo">→</button></div></div>
+</div>
+</dialog>
 </div>
 </div>
 </section>
@@ -357,6 +408,20 @@ document.getElementById('again').addEventListener('click',function(){f.reset();t
 </script>
 <script>
 document.querySelectorAll('a[data-service]').forEach(function(a){a.addEventListener('click',function(){var b=document.querySelector('button.svc[data-label="'+a.dataset.service+'"]');if(b)b.click();var d=document.querySelector('#quoteForm textarea');if(d&&a.textContent.indexOf('Magnetic')>=0&&!d.value)d.value='Magnetic signs for my vehicle — size and quantity: ';});});
+</script>
+<script>
+(function(){var figs=[].slice.call(document.querySelectorAll('.gx')),box=document.getElementById('gxBox'),cur=0,last=null;
+function show(i){cur=(i+figs.length)%figs.length;var f=figs[cur],im=f.querySelector('img');document.getElementById('gxImg').src=im.getAttribute('src');document.getElementById('gxImg').alt=im.alt;
+ document.getElementById('gxTitle').textContent=f.querySelector('b').textContent;document.getElementById('gxDesc').textContent=f.querySelector('figcaption>span:not(.gx-tag)').textContent;
+ document.getElementById('gxTag').textContent=f.dataset.tag;box.dataset.tag=f.dataset.tag;var c=document.getElementById('gxCta');c.textContent=f.dataset.cta;c.href=f.dataset.href;if(f.dataset.service)c.dataset.service=f.dataset.service;else delete c.dataset.service;}
+figs.forEach(function(f,i){f.querySelector('.gx-open').addEventListener('click',function(){last=this;show(i);if(box.showModal)box.showModal();else box.setAttribute('open','');});});
+function close(){box.close?box.close():box.removeAttribute('open');}
+document.getElementById('gxClose').onclick=close;document.getElementById('gxPrev').onclick=function(){show(cur-1);};document.getElementById('gxNext').onclick=function(){show(cur+1);};
+box.addEventListener('click',function(e){if(e.target===box)close();});box.addEventListener('close',function(){if(last)last.focus();});
+box.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1);});
+document.getElementById('gxCta').addEventListener('click',function(){var s=this.dataset.service;close();if(s){var b=document.querySelector('button.svc[data-label="'+s+'"]');if(b)b.click();}});
+document.querySelectorAll('.gx-cta[data-service]').forEach(function(a){a.addEventListener('click',function(){var b=document.querySelector('button.svc[data-label="'+a.dataset.service+'"]');if(b)b.click();});});
+})();
 </script>
 </body>
 </html>
