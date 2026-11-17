@@ -105,6 +105,23 @@ input,textarea{font:inherit}
 @media (max-width:600px){.gx-r2,.gx-r3{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.gx,.gx-open img{transition:none}.gx:hover{transform:none}.gx:hover .gx-open img{transform:none}}
 </style>
+<style>
+#quoteForm label,#quoteForm legend{font-family:Inter,system-ui,sans-serif}
+.qup{display:flex;flex-direction:column;gap:10px}
+.qup-h{font-size:15px;font-weight:700;color:#C9CDD4;font-family:Inter,system-ui,sans-serif}.qup-opt{font-weight:500;color:#8E93A0}
+.qup-drop{position:relative;display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:16px;border:2px dashed rgba(185,168,255,0.55);background:rgba(109,74,255,0.08);cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s}
+.qup-drop:hover,.qup-drop.over{border-color:#FFC72C;background:rgba(255,199,44,0.08);box-shadow:0 0 24px rgba(255,199,44,0.25)}
+.qup-drop:focus-within{outline:3px solid #fff;outline-offset:3px}
+.qup-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+.qup-ico{flex:none;width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#14121f;background:linear-gradient(140deg,#FFC72C,#FF7A1A);box-shadow:0 8px 20px -6px rgba(255,199,44,0.8)}
+.qup-t{display:flex;flex-direction:column;gap:4px;font-family:Inter,system-ui,sans-serif}.qup-t b{font-size:16px;color:#fff}.qup-t span{font-size:13px;color:#A3A8B3;line-height:1.45}
+.qup-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.qup-list li{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:12px;background:rgba(20,16,46,0.8);border:1px solid rgba(185,168,255,0.25);font-family:Inter,system-ui,sans-serif;font-size:14px}
+.qup-list img,.qup-list .qf-ext{flex:none;width:42px;height:42px;border-radius:8px;object-fit:cover;background:#2a2550;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#FFC72C}
+.qup-list .qf-n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#E4E6EB}.qup-list .qf-s{color:#8E93A0;font-size:12px}
+.qup-list button{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid rgba(185,168,255,0.4);background:transparent;color:#fff;cursor:pointer;font-size:14px}
+.qup-err{margin:0;color:#FFB4B4;font-weight:600;font-size:14px;font-family:Inter,system-ui,sans-serif}
+</style>
 </head>
 <body>
 
@@ -349,6 +366,16 @@ input,textarea{font:inherit}
 <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 700; color: #C9CDD4">Phone<input name="phone" type="tel" style="background: rgba(7,8,20,0.8); border: 1px solid rgba(185,168,255,0.3); border-radius: 12px; padding: 14px; color: #ffffff; font-size: 16px"></label>
 </div>
 <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 700; color: #C9CDD4">Project details — sizes, quantity, deadline<textarea name="details" rows="4" style="background: rgba(7,8,20,0.8); border: 1px solid rgba(185,168,255,0.3); border-radius: 12px; padding: 14px; color: #ffffff; font-size: 16px; resize: vertical"></textarea></label>
+<div class="qup">
+<span class="qup-h">Attach files <span class="qup-opt">(optional)</span></span>
+<label class="qup-drop" id="qDrop" for="qFiles">
+<input type="file" id="qFiles" multiple accept=".png,.jpg,.jpeg,.webp,.gif,.heic,.pdf,.svg,.ai,.eps,.psd,image/*,application/pdf">
+<span class="qup-ico" aria-hidden="true">⬆</span>
+<span class="qup-t"><b>Upload your logo, artwork or a photo</b><span>Drag files here or tap to browse · PNG, JPG, PDF, SVG, AI, EPS · up to 5 files, 10 MB each</span></span>
+</label>
+<ul class="qup-list" id="qList" aria-live="polite"></ul>
+<p class="qup-err" id="qUpErr" role="alert" hidden></p>
+</div>
 <p id="qErr" role="alert" hidden style="margin:0;color:#FFB4B4;font-weight:600">Sorry, that didn't send. Please call or text <a href="tel:+13528162574" style="color:#FFC72C">352-816-2574</a> or email <a href="mailto:Graphicsignsaccessories@outlook.com" style="color:#FFC72C">Graphicsignsaccessories@outlook.com</a>.</p>
 <button type="submit" style="background: #FFC72C; color: #16181D; border: 0; padding: 18px 28px; border-radius: 999px; font-weight: 800; font-size: 17px; cursor: pointer; min-height: 44px; box-shadow: 0 0 32px rgba(255,199,44,0.45)">Request my free quote</button>
 </form>
@@ -399,9 +426,9 @@ f.addEventListener('submit',function(e){e.preventDefault();var d=new FormData(f)
  fd.append('formID',JF);fd.append('simple_spc',JF+'-'+JF);fd.append('website','');
  fd.append('q2_q2_textbox0',picked);fd.append('q3_q3_fullname1[first]',nm[0]||'');fd.append('q3_q3_fullname1[last]',nm.slice(1).join(' ')||'-');
  fd.append('q4_q4_textbox2',d.get('business')||'');fd.append('q5_q5_email3',d.get('email')||'');fd.append('q6_q6_textbox4',d.get('phone')||'');
- fd.append('q7_q7_textarea5',d.get('details')||'');fd.append('q8_q8_textbox6','Home page quote form');
+ fd.append('q7_q7_textarea5',d.get('details')||'');fd.append('q8_q8_textbox6','Home page quote form');(window.__qFiles||[]).forEach(function(f){fd.append('q12_q12_fileupload10[]',f,f.name);});
  btn.disabled=true;btn.dataset.t=btn.textContent;btn.textContent='Sending…';if(err)err.hidden=true;
- fetch('https://submit.jotform.com/submit/'+JF+'/',{method:'POST',body:fd,mode:'no-cors'}).then(function(){f.hidden=true;t.hidden=false;t.querySelector('button,[tabindex]')&&t.focus&&t.focus();}).catch(function(){if(err)err.hidden=false;}).finally(function(){btn.disabled=false;btn.textContent=btn.dataset.t;});
+ fetch('https://submit.jotform.com/submit/'+JF+'/',{method:'POST',body:fd,mode:'no-cors'}).then(function(){f.hidden=true;t.hidden=false;if(window.__qReset)window.__qReset();t.querySelector('button,[tabindex]')&&t.focus&&t.focus();}).catch(function(){if(err)err.hidden=false;}).finally(function(){btn.disabled=false;btn.textContent=btn.dataset.t;});
 });
 document.getElementById('again').addEventListener('click',function(){f.reset();t.hidden=true;f.hidden=false;});
 })();
@@ -421,6 +448,22 @@ box.addEventListener('click',function(e){if(e.target===box)close();});box.addEve
 box.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1);});
 document.getElementById('gxCta').addEventListener('click',function(){var s=this.dataset.service;close();if(s){var b=document.querySelector('button.svc[data-label="'+s+'"]');if(b)b.click();}});
 document.querySelectorAll('.gx-cta[data-service]').forEach(function(a){a.addEventListener('click',function(){var b=document.querySelector('button.svc[data-label="'+a.dataset.service+'"]');if(b)b.click();});});
+})();
+</script>
+<script>
+(function(){var inp=document.getElementById('qFiles'),list=document.getElementById('qList'),drop=document.getElementById('qDrop'),err=document.getElementById('qUpErr');window.__qFiles=[];
+var OK=/\.(png|jpe?g|webp|gif|heic|pdf|svg|ai|eps|psd)$/i,MAX=10*1024*1024;
+function sz(b){return b>1048576?(b/1048576).toFixed(1)+' MB':Math.max(1,Math.round(b/1024))+' KB';}
+function render(){list.innerHTML='';window.__qFiles.forEach(function(f,i){var li=document.createElement('li');var th;if(/^image\/(png|jpe?g|webp|gif)/.test(f.type)){th=document.createElement('img');th.alt='';th.src=URL.createObjectURL(f);}else{th=document.createElement('span');th.className='qf-ext';th.textContent=(f.name.split('.').pop()||'FILE').toUpperCase().slice(0,4);}
+ li.appendChild(th);var n=document.createElement('span');n.className='qf-n';n.textContent=f.name;li.appendChild(n);var s=document.createElement('span');s.className='qf-s';s.textContent=sz(f.size);li.appendChild(s);
+ var x=document.createElement('button');x.type='button';x.textContent='✕';x.setAttribute('aria-label','Remove '+f.name);x.onclick=function(){window.__qFiles.splice(i,1);render();};li.appendChild(x);list.appendChild(li);});}
+function add(files){var bad=[];[].forEach.call(files,function(f){if(!OK.test(f.name)){bad.push(f.name+' (file type not supported)');return;}if(f.size>MAX){bad.push(f.name+' (over 10 MB)');return;}if(window.__qFiles.length>=5){bad.push(f.name+' (5 files max)');return;}window.__qFiles.push(f);});
+ err.hidden=!bad.length;err.textContent=bad.length?'Not added: '+bad.join(', ')+'. You can email those to Graphicsignsaccessories@outlook.com.':'';render();inp.value='';}
+inp.addEventListener('change',function(){add(inp.files);});
+['dragenter','dragover'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add('over');});});
+['dragleave','drop'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove('over');});});
+drop.addEventListener('drop',function(e){if(e.dataTransfer&&e.dataTransfer.files)add(e.dataTransfer.files);});
+window.__qReset=function(){window.__qFiles=[];render();err.hidden=true;};
 })();
 </script>
 </body>
